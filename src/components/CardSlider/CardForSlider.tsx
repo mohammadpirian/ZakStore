@@ -2,7 +2,7 @@ import React from "react";
 
 const CardForSlider = () => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-2 flex flex-col gap-2">
+    <div className="bg-white shadow-lg rounded-lg p-2 flex flex-col gap-2 w-80">
       <div className="relative">
         <img src="./images/products/1.jpg" alt="" className="rounded-lg" />
         <p className="absolute top-3 right-4">مردانه</p>
