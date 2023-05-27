@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 
 const Navbar = () => {
@@ -17,7 +18,10 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex gap-8">
-            <button>ورود</button>
+            <Link href="/login">
+              <button>ورود</button>
+            </Link>
+
             <button>سبدخرید</button>
           </div>
         </div>

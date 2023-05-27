@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      rotate: {
+        270: "270deg",
+      },
       keyframes: {
         nav: {
           "0%": "height:'0%'",
