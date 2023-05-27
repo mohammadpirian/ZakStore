@@ -4,7 +4,7 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 const Slider = () => {
   return (
-    <Splide className="w-full h-96">
+    <Splide className="w-full h-96 container">
       <SplideSlide>
         <img
           src="images/banner/1.jpg"
@@ -52,4 +52,3 @@ const Slider = () => {
 };
 
 export default Slider;
-

@@ -1,16 +1,18 @@
-import Navbar from "./../components/Navbar/Navbar";
-import Footer from "./../components/Footer/Footer";
-import Slider from "@/components/Slider/Slider";
-import CardSlider from "@/components/CardSlider/CardSlider";
+import { CardSlider, Slider } from "@/components";
+
+import Head from "next/head";
 
 export default function Home() {
   return (
-    <main className="">
-      <Navbar />
-      <Slider />
-      <CardSlider />
-      <CardSlider />
-      <Footer />
-    </main>
+    <>
+      <Head>
+        <title>ZakStore</title>
+      </Head>
+      <main className="pt-24">
+        <Slider />
+        <CardSlider />
+        <CardSlider />
+      </main>
+    </>
   );
 }

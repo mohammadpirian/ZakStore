@@ -1,3 +1,4 @@
+import { AuthLayout } from "@/layout";
 import Link from "next/link";
 import React from "react";
 
@@ -50,6 +51,10 @@ const Login = () => {
       </div>
     </div>
   );
+};
+
+Login.getLayout = function (page) {
+  return <AuthLayout>{page}</AuthLayout>;
 };
 
 export default Login;

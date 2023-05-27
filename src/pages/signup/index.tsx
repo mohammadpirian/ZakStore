@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { AuthLayout } from "@/layout";
 
 const Signup = () => {
   return (
@@ -63,6 +64,10 @@ const Signup = () => {
       </div>
     </div>
   );
+};
+
+Signup.getLayout = function (page) {
+  return <AuthLayout>{page}</AuthLayout>;
 };
 
 export default Signup;

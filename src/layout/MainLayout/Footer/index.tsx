@@ -2,7 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="flex justify-between py-4 px-12 border-t " dir="rtl">
+    <div
+      className="flex justify-between py-4 px-12 border-t container"
+      dir="rtl"
+    >
       <div className="flex flex-col gap-2">
         <h2 className="border-b p-2">خرید</h2>
         <a>زنانه</a>

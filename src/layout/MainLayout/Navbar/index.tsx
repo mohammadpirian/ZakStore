@@ -9,9 +9,9 @@ const Navbar = () => {
   };
 
   return (
-    <div dir="rtl" className="">
-      <div className={`${!isDropdownOpen && "shadow-lg"}`}>
-        <div className="flex justify-between p-4 px-8 items-center">
+    <div dir="rtl" className="container  absolute z-20">
+      <div className={`${!isDropdownOpen && "shadow-lg "}`}>
+        <div className="flex justify-between p-4 px-8 items-center bg-white">
           <div>
             <button className="w-40">
               <img src="images/logo.png" alt="" />
@@ -25,7 +25,7 @@ const Navbar = () => {
             <button>سبدخرید</button>
           </div>
         </div>
-        <div className="flex justify-between px-8 pb-4">
+        <div className="flex justify-between px-8 pb-4 bg-white">
           <div className="flex gap-4">
             <button onClick={toggleDropdown}>دسته بندی ها</button>
             <button>پیشنهادات</button>
@@ -38,7 +38,7 @@ const Navbar = () => {
           </div>
         </div>
         {isDropdownOpen && (
-          <div className="animation origin-top shadow-lg">
+          <div className="animation origin-top shadow-lg bg-white">
             <div className=" px-8 p-2 flex justify-between ">
               <div className="flex flex-col gap-1">
                 <h2 className="border-b px-8">زنانه</h2>
