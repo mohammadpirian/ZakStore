@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import { CiLogin } from "react-icons/ci";
+import { CiShoppingCart } from "react-icons/ci";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -11,21 +13,23 @@ const Navbar = () => {
   return (
     <div dir="rtl" className="container  absolute z-20">
       <div className={`${!isDropdownOpen && "shadow-lg "}`}>
-        <div className="flex justify-between p-4 px-8 items-center bg-white">
-          <div>
-            <button className="w-40">
-              <img src="images/logo.png" alt="" />
-            </button>
-          </div>
-          <div className="flex gap-8">
+        <div className="flex h-full justify-between p-4 px-8 items-center bg-meWhite text-meBlack2">
+          <button>
+            <img src="images/logo/logo.png" alt="" className="w-40" />
+          </button>
+          <div className="flex gap-8 ">
             <Link href="/login">
-              <button>ورود</button>
+              <button>
+                <CiLogin className="w-6 h-6 " />
+              </button>
             </Link>
 
-            <button>سبدخرید</button>
+            <button>
+              <CiShoppingCart className="w-6 h-6" />
+            </button>
           </div>
         </div>
-        <div className="flex justify-between px-8 pb-4 bg-white">
+        <div className="flex justify-between px-8 pb-4 bg-meWhite text-meBlack2">
           <div className="flex gap-4">
             <button onClick={toggleDropdown}>دسته بندی ها</button>
             <button>پیشنهادات</button>
@@ -34,11 +38,11 @@ const Navbar = () => {
             <button>درباره ما</button>
           </div>
           <div>
-            <p>همدان</p>
+            <p className="text-mePrimary">همدان</p>
           </div>
         </div>
         {isDropdownOpen && (
-          <div className="animation origin-top shadow-lg bg-white">
+          <div className="animation origin-top shadow-lg bg-meWhite text-meBlack2">
             <div className=" px-8 p-2 flex justify-between ">
               <div className="flex flex-col gap-1">
                 <h2 className="border-b px-8">زنانه</h2>

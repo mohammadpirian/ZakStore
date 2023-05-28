@@ -6,7 +6,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>ZakStore</title>
-        <link rel="icon" href="/images/logo2.png" />
+        <link rel="icon" href="/images/logo/logo2.png" />
       </Head>
       <body>
         <Main />
