@@ -1,12 +1,12 @@
 import { AdminLayout } from "@/layout";
 import React, { ReactNode } from "react";
 
-const adminStock = () => {
+const AdminStock = () => {
   return <div></div>;
 };
 
-adminStock.getLayout = function (page: ReactNode) {
+AdminStock.getLayout = function (page: ReactNode) {
   return <AdminLayout>{page}</AdminLayout>;
 };
 
-export default adminStock;
+export default AdminStock;

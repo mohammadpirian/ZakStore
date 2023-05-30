@@ -1,7 +1,7 @@
 import { AdminLayout } from "@/layout";
 import React, { ReactNode } from "react";
 
-const adminCategory = () => {
+const AdminCategory = () => {
   return (
     <div dir="rtl" className="bg-meWhite p-4 mt-4 rounded-3xl flex">
       <div className="w-1/2">
@@ -42,8 +42,8 @@ const adminCategory = () => {
   );
 };
 
-adminCategory.getLayout = function (page: ReactNode) {
+AdminCategory.getLayout = function (page: ReactNode) {
   return <AdminLayout>{page}</AdminLayout>;
 };
 
-export default adminCategory;
+export default AdminCategory;

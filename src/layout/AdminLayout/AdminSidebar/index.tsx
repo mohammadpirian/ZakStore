@@ -15,9 +15,11 @@ const AdminSidebar = () => {
       dir="rtl"
     >
       <div className="flex justify-center p-7 border-b-2">
-        <button>
-          <img src="images/logo/logo.png" alt="" className="w-40" />
-        </button>
+        <Link href={"/"}>
+          <button>
+            <img src="images/logo/logo.png" alt="" className="w-40" />
+          </button>
+        </Link>
       </div>
 
       <div className="flex flex-col gap-4 items-end p-2 py-4">
