@@ -117,9 +117,9 @@ const Navbar = () => {
               {data1.categories &&
                 data1.categories.map((item) => {
                   return (
-                    <div key={item.id}>
+                    <div key={item._id} className="flex flex-col gap-1">
                       <h2 className="border-b px-8">{item.name}</h2>
-                      <SubCategory />
+                      <SubCategory id={item._id} />
                     </div>
                   );
                 })}
