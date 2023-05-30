@@ -7,7 +7,7 @@ const fetchData = async (url) => {
   return response.data.data.subcategories;
 };
 const SubCategory = ({ id }: { id: string }) => {
-  console.log(id);
+  // console.log(id);
   const {
     data: data2,
     isLoading: isLoading2,
@@ -24,6 +24,7 @@ const SubCategory = ({ id }: { id: string }) => {
     return (
       <a
         key={data2._id}
+        onClick={(e) => console.log(e.target)}
         className="hover:bg-gray-100 cursor-pointer px-1 rounded"
       >
         {item2.name}

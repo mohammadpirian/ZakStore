@@ -43,7 +43,7 @@ import { CiShoppingCart } from "react-icons/ci";
 //   }
 // ---------------------------
 
-const fetchData = async (url) => {
+const fetchData = async (url: string) => {
   const response = await axios.get(url);
   return response.data.data;
 };
@@ -67,7 +67,7 @@ const Navbar = () => {
     return <div>Error:{error1}</div>;
   }
 
-  console.log(data1.categories);
+  // console.log(data1.categories);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
