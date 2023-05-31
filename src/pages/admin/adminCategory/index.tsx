@@ -10,7 +10,8 @@ const createCategory = async (categoryName) => {
   return response.data;
 };
 // ==================
-const createSubCategory = async (selectCategory, subCategoryName) => {
+const createSubCategory = async ({ selectCategory, subCategoryName }) => {
+  console.log(subCategoryName);
   const response = await axios.post("http://localhost:8000/api/subcategories", {
     category: selectCategory,
     name: subCategoryName,
@@ -24,9 +25,12 @@ const fetchData = async (url: string) => {
 };
 
 const AdminCategory = () => {
-  const [selectCategory, setSelectCategory] = useState("");
+  // const [selectCategory, setSelectCategory] = useState("");
   const mutation = useMutation(createCategory);
-  const mutationsub = useMutation(createSubCategory);
+  const { mutate: mutationsub } = useMutation({
+    mutationKey: "subCategory",
+    mutationFn: createSubCategory,
+  });
 
   const {
     data: data1,
@@ -37,17 +41,18 @@ const AdminCategory = () => {
     fetchData("http://localhost:8000/api/categories")
   );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const categoryName = event.target.elements.categoryName.value;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const categoryName = e.target.elements.categoryName.value;
     mutation.mutate(categoryName);
   };
 
-  const handleSubmitSub = (event) => {
-    event.preventDefault();
-    const subCategoryName = event.target.elements.subCategoryName.value;
+  const handleSubmitSub = (e) => {
+    e.preventDefault();
+    const subCategoryName = e.target.elements.subCategoryName.value;
+    const selectCategory = e.target.elements.selectCategory.value;
     console.log(subCategoryName, selectCategory);
-    mutationsub.mutate(selectCategory, subCategoryName);
+    mutationsub({ selectCategory, subCategoryName });
   };
 
   if (isLoading1) {
@@ -84,9 +89,9 @@ const AdminCategory = () => {
             className="p-2 rounded-xl w-4/6"
           />
           <select
-            onChange={(e) => {
-              setSelectCategory(e.target.value);
-            }}
+            // onChange={(e) => {
+            //   setSelectCategory(e.target.value);
+            // }}
             name="selectCategory"
             id=""
             className="p-2 rounded-xl w-4/6"
