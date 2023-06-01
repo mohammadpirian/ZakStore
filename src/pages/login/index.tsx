@@ -1,8 +1,10 @@
 import { AuthLayout } from "@/layout";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import Cookies from "universal-cookie";
 
 interface IFormInputs {
   username: string;
@@ -18,9 +20,25 @@ const Login = () => {
 
   const router = useRouter();
 
+  const getLogin = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/login",
+        data
+      );
+      // console.log(response.data);
+      const cookie = new Cookies();
+      cookie.set("adminToken", response.data.token.accessToken);
+      router.push("/admin");
+      return response.data;
+    } catch (error) {
+      router.push("/");
+      console.log(error);
+    }
+  };
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    console.log(data);
-    router.push("/admin");
+    // console.log(data);
+    getLogin(data);
   };
 
   return (
