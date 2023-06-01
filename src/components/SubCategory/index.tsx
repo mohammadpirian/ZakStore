@@ -1,9 +1,11 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { request } from "@/utils/request";
+
+
 
 const fetchData = async (url) => {
-  const response = await axios.get(url);
+  const response = await request.get(url);
   return response.data.data.subcategories;
 };
 const SubCategory = ({ id }: { id: string }) => {
@@ -14,7 +16,7 @@ const SubCategory = ({ id }: { id: string }) => {
     isError: isError2,
     error: error2,
   } = useQuery([`data${id}`], () =>
-    fetchData(`http://localhost:8000/api/subcategories?category=${id}`)
+    fetchData(`/subcategories?category=${id}`)
   );
 
   if (isLoading2) {

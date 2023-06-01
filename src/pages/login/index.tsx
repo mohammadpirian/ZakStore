@@ -1,5 +1,5 @@
 import { AuthLayout } from "@/layout";
-import axios from "axios";
+import { request } from "@/utils/request";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
@@ -22,13 +22,12 @@ const Login = () => {
 
   const getLogin = async (data) => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/auth/login",
-        data
-      );
+      const response = await request.post("/auth/login", data);
       // console.log(response.data);
       const cookie = new Cookies();
       cookie.set("adminToken", response.data.token.accessToken);
+      cookie.set("refreshToken", response.data.token.refreshToken);
+
       router.push("/admin");
       return response.data;
     } catch (error) {

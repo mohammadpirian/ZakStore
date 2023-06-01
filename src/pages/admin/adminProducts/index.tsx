@@ -1,19 +1,18 @@
 import { AdminLayout } from "@/layout";
+import { request } from "@/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import React, { ReactNode, useState } from "react";
+import Cookies from "universal-cookie";
+request;
 
 const createProduct = async (productForm) => {
-  const response = await axios.post(
-    "http://localhost:8000/api/products",
-    productForm,
-    {
-      headers: {
-        "Content-Type": `multipart/form-data ; boundary=${productForm._boundary}`,
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NmUzNjlkODQ0Yzk5MGYzZWE0ODYwMyIsImlhdCI6MTY4NTYwODM0OCwiZXhwIjoxNjg1NjA5MjQ4fQ.pKF_KMSjyvaFq46HGNMgvZ0Xx5OjexaSsnmMvcdkTdo"}`,
-      },
-    }
-  );
+  const cookie = new Cookies();
+  const response = await request.post("/products", productForm, {
+    headers: {
+      "Content-Type": `multipart/form-data ; boundary=${productForm._boundary}`,
+      Authorization: `Bearer ${cookie.get("adminToken")}`,
+    },
+  });
   return response.data;
 };
 
@@ -51,7 +50,7 @@ const AdminProducts = () => {
   };
 
   const fetchData = async (url: string) => {
-    const response = await axios.get(url);
+    const response = await request.get(url);
     return response.data.data;
   };
 
@@ -60,9 +59,7 @@ const AdminProducts = () => {
     isLoading: isLoading1,
     isError: isError1,
     error: error1,
-  } = useQuery(["data1"], () =>
-    fetchData("http://localhost:8000/api/categories")
-  );
+  } = useQuery(["data1"], () => fetchData("/categories"));
 
   // const useGetSubCategory = (categoryId) =>
   //   useQuery(["data2"], () =>
@@ -85,8 +82,7 @@ const AdminProducts = () => {
     error: error2,
   } = useQuery(
     ["data2", category],
-    () =>
-      fetchData(`http://localhost:8000/api/subcategories?category=${category}`),
+    () => fetchData(`/subcategories?category=${category}`),
     { enabled: !!category }
   );
 

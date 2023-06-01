@@ -1,6 +1,6 @@
 import SubCategory from "@/components/SubCategory";
+import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CiLogin } from "react-icons/ci";
@@ -44,7 +44,7 @@ import { CiShoppingCart } from "react-icons/ci";
 // ---------------------------
 
 const fetchData = async (url: string) => {
-  const response = await axios.get(url);
+  const response = await request.get(url);
   return response.data.data;
 };
 
@@ -56,9 +56,7 @@ const Navbar = () => {
     isLoading: isLoading1,
     isError: isError1,
     error: error1,
-  } = useQuery(["data1"], () =>
-    fetchData("http://localhost:8000/api/categories")
-  );
+  } = useQuery(["data1"], () => fetchData("/categories"));
 
   if (isLoading1) {
     return <div>Loading...</div>;

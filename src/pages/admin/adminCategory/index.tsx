@@ -1,10 +1,10 @@
 import { AdminLayout } from "@/layout";
+import { request } from "@/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import React, { ReactNode, useState } from "react";
 
 const createCategory = async (categoryName) => {
-  const response = await axios.post("http://localhost:8000/api/categories", {
+  const response = await request.post("/categories", {
     name: categoryName,
   });
   return response.data;
@@ -12,7 +12,7 @@ const createCategory = async (categoryName) => {
 // ==================
 const createSubCategory = async ({ selectCategory, subCategoryName }) => {
   console.log(subCategoryName);
-  const response = await axios.post("http://localhost:8000/api/subcategories", {
+  const response = await request.post("/subcategories", {
     category: selectCategory,
     name: subCategoryName,
   });
@@ -20,7 +20,7 @@ const createSubCategory = async ({ selectCategory, subCategoryName }) => {
 };
 
 const fetchData = async (url: string) => {
-  const response = await axios.get(url);
+  const response = await request.get(url);
   return response.data.data;
 };
 
@@ -37,9 +37,7 @@ const AdminCategory = () => {
     isLoading: isLoading1,
     isError: isError1,
     error: error1,
-  } = useQuery(["data1"], () =>
-    fetchData("http://localhost:8000/api/categories")
-  );
+  } = useQuery(["data1"], () => fetchData("/categories"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
