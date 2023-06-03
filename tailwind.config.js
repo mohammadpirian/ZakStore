@@ -38,6 +38,8 @@ module.exports = {
         meBlack: "#393E46",
         meBlack2: "#222831",
         mePrimary: "#00ADB5",
+        meMain: "#D9D9D9",
+        meBlackDot: "#323232",
       },
     },
   },

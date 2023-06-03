@@ -8,9 +8,11 @@
     src: url(../font/IRANSansWeb.woff);
   }
 }
+
 .animation {
   animation: nav 0.5s;
 }
+
 @keyframes nav {
   from {
     transform: scaleY(0);

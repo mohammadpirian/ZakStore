@@ -24,7 +24,7 @@ request.interceptors.response.use(
     // console.log("config", config);
     if (error.response.status === 401 && !config.sent) {
       config.sent = true;
-      if (config.url !== "/auth/token" && config.url !== "/auth/login") {
+      if (config.url !== "/auth/token" && config.url !== "/auth/loginAdmin") {
         const refreshToken = cookie.get("refreshToken");
         request.post("/auth/token", { refreshToken }).then((res) => {
           const accessToken = res.data.token.accessToken;
@@ -36,7 +36,7 @@ request.interceptors.response.use(
       } else if (config.url === "/auth/token") {
         cookie.remove("adminToken");
         cookie.remove("refreshToken");
-        location.href = "/login";
+        location.href = "/loginAdmin";
       }
     }
   }
