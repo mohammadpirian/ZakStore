@@ -1,18 +1,18 @@
 import React from "react";
 
-const CardForSlider = () => {
+const CardForSlider = ({ item }: any) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-2 flex flex-col gap-2 w-80">
-      <div className="relative">
-        <img src="./images/products/1.jpg" alt="" className="rounded-lg" />
-        <p className="absolute top-3 right-4">مردانه</p>
+    <div className="bg-white  rounded-lg p-2 flex flex-col gap-2 w-48 h-56 relative justify-center items-center">
+      <div className="absolute rounded-full -top-20 left-3  w-[10.5rem] shadow-xl">
+        <img src={item.images[0]} alt="" className="rounded-full w-[11rem]" />
       </div>
-      <div className="px-4 flex pb-6">
-        <h2 className="font-semibold">پلیور مردانه کروم مدل یقه اسکی</h2>
+      <div className="px-2 pt-24 flex flex-col text-center gap-2 pb-6">
+        <h2 className="text-xs">{item.name}</h2>
+        <h2 className="text-sm">{item.brand}</h2>
       </div>
-      <div className="flex justify-end px-4">
-        <h2>
-          <span className="font-medium">1,144,500 </span>
+      <div className="flex justify-center px-4">
+        <h2 className="text-xs">
+          <span className="text-meBlueText">{item.price} </span>
           <span className="text-gray-600 font-light">تومان</span>
         </h2>
       </div>

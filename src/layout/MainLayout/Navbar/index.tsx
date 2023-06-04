@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CiLogin } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
+import Cookies from "universal-cookie";
 
 // useEffect(() => {
 //   const getData = async () => {
@@ -49,6 +50,9 @@ const fetchData = async (url: string) => {
 };
 
 const Navbar = () => {
+  const cookie = new Cookies();
+  console.log(cookie.get("adminToken"));
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const {
@@ -109,13 +113,6 @@ const Navbar = () => {
         {isDropdownOpen && (
           <div className="animation origin-top shadow-lg bg-meMain text-meBlack2">
             <div className=" px-8 p-2 flex justify-between ">
-              {/* <div className="flex flex-col gap-1">
-                <h2 className="border-b px-8">زنانه</h2>
-                <a className="hover:bg-gray-100 cursor-pointer px-1 rounded">
-                  تی شرت
-                </a>
-                
-              </div> */}
               {data1.categories &&
                 data1.categories.map((item) => {
                   return (
