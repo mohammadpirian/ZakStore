@@ -51,7 +51,7 @@ const fetchData = async (url: string) => {
 
 const Navbar = () => {
   const cookie = new Cookies();
-  console.log(cookie.get("adminToken"));
+  // console.log(cookie.get("adminToken"));
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

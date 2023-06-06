@@ -11,7 +11,7 @@ import {
 const AdminSidebar = () => {
   return (
     <div
-      className="flex flex-col w-3/12 h-[42rem] p-2 bg-meWhite text-meBlack2 m-4 rounded-xl"
+      className="flex flex-col w-2/12 h-[42rem] p-2 bg-meWhite text-meBlack2 m-4 rounded-xl"
       dir="rtl"
     >
       <div className="flex justify-center p-7 border-b-2">
@@ -25,7 +25,6 @@ const AdminSidebar = () => {
       <div className="flex flex-col gap-4 items-end p-2 py-4">
         <button className="p-3 px-6 w-full flex gap-2 text-sm items-center bg-meBlack hover:bg-meBlack2 text-meWhite rounded-full ">
           <AiOutlineFolderAdd className="w-6 h-6" />
-
           <Link href={"/admin/adminProducts"}>
             <span>کالاها</span>
           </Link>
