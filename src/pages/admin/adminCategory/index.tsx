@@ -1,3 +1,4 @@
+import CategoryTable from "@/components/Tables/CategoryTable";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -58,33 +59,35 @@ const AdminCategory = () => {
   }
 
   return (
-    <div dir="rtl" className="bg-meWhite p-4 mt-4 rounded-3xl flex">
-      <div className="w-1/2">
+    <div dir="rtl" className="  mt-4 rounded-3xl flex gap-4">
+      <div className="w-3/12 flex flex-col gap-10">
         <form
           action=""
-          className=" flex flex-col gap-4 items-center border-b-2 border-meBlack2 pb-4"
+          className="bg-meMain p-4 py-8 rounded-xl w-full flex flex-col gap-4 items-center  "
           onSubmit={handleSubmit}
         >
+          <h2 className="pb-8">اضافه کردن دسته بندی</h2>
           <input
             type="text"
             name="categoryName"
             placeholder="دسته بندی را وارد کنید"
-            className="p-2 rounded-xl w-4/6"
+            className="p-2 rounded-xl w-full"
           />
-          <button className=" text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2 w-4/6">
+          <button className=" text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2 w-full">
             اضافه کردن
           </button>
         </form>
         <form
           onSubmit={handleSubmitSub}
           action=""
-          className=" flex flex-col gap-4 items-center border-b-2 border-meBlack2 pb-4 mt-4"
+          className="bg-meMain p-4  flex flex-col py-8 rounded-xl gap-4 items-center"
         >
+          <h2 className="pb-7">اضافه کردن زیرگروه</h2>
           <input
             type="text"
             name="subCategoryName"
-            placeholder="زیر دسته را وارد کنید"
-            className="p-2 rounded-xl w-4/6"
+            placeholder="زیر گروه را وارد کنید"
+            className="p-2 rounded-xl w-full"
           />
           <select
             // onChange={(e) => {
@@ -92,7 +95,7 @@ const AdminCategory = () => {
             // }}
             name="selectCategory"
             id=""
-            className="p-2 rounded-xl w-4/6"
+            className="p-2 rounded-xl w-full"
           >
             <option value="" selected hidden>
               دسته بندی
@@ -105,12 +108,12 @@ const AdminCategory = () => {
               );
             })}
           </select>
-          <button className=" text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2 w-4/6">
+          <button className=" text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2 w-full">
             اضافه کردن
           </button>
         </form>
       </div>
-      <div></div>
+      <CategoryTable />
     </div>
   );
 };

@@ -1,8 +1,13 @@
+import StockTable from "@/components/Tables/StockTable";
 import { AdminLayout } from "@/layout";
 import React, { ReactNode } from "react";
 
 const AdminStock = () => {
-  return <div></div>;
+  return (
+    <div className="mt-4 p-4 bg-meMain rounded-xl" dir="rtl">
+      <StockTable />
+    </div>
+  );
 };
 
 AdminStock.getLayout = function (page: ReactNode) {
