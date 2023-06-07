@@ -1,9 +1,9 @@
+import { ProductTable } from "@/components";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { ReactNode, useState } from "react";
 import Cookies from "universal-cookie";
-request;
 
 const createProduct = async (productForm) => {
   const cookie = new Cookies();
@@ -90,44 +90,76 @@ const AdminProducts = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="bg-meWhite p-4 mt-4 rounded-3xl flex" dir="rtl">
+    <div className=" py-4 mt-4 rounded-3xl flex gap-4" dir="rtl">
       <form
         onSubmit={handleSubmit}
         action=""
-        className=" flex flex-wrap gap-4 justify-center border-b-2 pb-4 w-full"
+        className="bg-meMain rounded-xl flex flex-col gap-4 justify-center border-b-2 pb-4 w-3/12 px-3 py-6 h-full"
       >
+        <h1 className="text-center">اضافه کردن محصول</h1>
         <input
           type="text"
           name="nameProduct"
           placeholder="نام محصول را وارد کنید"
-          className="p-2 rounded-xl w-4/12"
+          className="p-2 rounded-xl "
         />
         <input
           type="text"
           name="priceProduct"
           placeholder="قیمت محصول را وارد کنید"
-          className="p-2 rounded-xl w-4/12"
+          className="p-2 rounded-xl "
         />
         <input
           type="text"
           name="quantityProduct"
           placeholder="موجودی محصول را وارد کنید"
-          className="p-2 rounded-xl w-4/12"
+          className="p-2 rounded-xl "
         />
         <input
           type="text"
           name="brandProduct"
           placeholder="برند محصول را وارد کنید"
-          className="p-2 rounded-xl w-4/12"
+          className="p-2 rounded-xl "
         />
+        <select
+          name="categoryProduct"
+          id=""
+          className="p-2 rounded-xl "
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+        >
+          <option selected hidden>
+            گروه بندی
+          </option>
+          {data1?.categories.map((item) => {
+            return (
+              <option key={item._id} value={item._id}>
+                {item.name}
+              </option>
+            );
+          })}
+        </select>
+        <select name="subCategoryProduct" id="" className="p-2 rounded-xl ">
+          <option selected hidden>
+            زیر گروه
+          </option>
+          {data2?.subcategories.map((item) => {
+            return (
+              <option key={item._id} value={item._id}>
+                {item.name}
+              </option>
+            );
+          })}
+        </select>
         <input
           type="text"
           name="descriptionProduct"
           placeholder="توضیحات محصول را وارد کنید"
-          className="p-2 rounded-xl w-4/12"
+          className="p-2 rounded-xl "
         />
 
-        <div className="relative w-4/12 ">
+        <div className="relative  ">
           <input
             name="imagesProduct"
             multiple
@@ -138,45 +170,12 @@ const AdminProducts = () => {
           <p className="w-full h-full text-center">{selectPhotoAdmin}</p>
         </div>
 
-        <select
-          name="categoryProduct"
-          id=""
-          className="p-2 rounded-xl w-4/12"
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
-        >
-          <option selected hidden>
-            دسته بندی
-          </option>
-          {data1?.categories.map((item) => {
-            return (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            );
-          })}
-        </select>
-        <select
-          name="subCategoryProduct"
-          id=""
-          className="p-2 rounded-xl w-4/12"
-        >
-          <option selected hidden>
-            زیر دسته
-          </option>
-          {data2?.subcategories.map((item) => {
-            return (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            );
-          })}
-        </select>
-        <button className=" text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2 w-4/6">
+        
+        <button className="w-full text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2">
           اضافه کردن
         </button>
       </form>
+      <ProductTable />
     </div>
   );
 };

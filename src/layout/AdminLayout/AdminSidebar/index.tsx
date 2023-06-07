@@ -11,10 +11,10 @@ import {
 const AdminSidebar = () => {
   return (
     <div
-      className="flex flex-col w-2/12 h-[42rem] p-2 bg-meWhite text-meBlack2 m-4 rounded-xl"
+      className="flex flex-col w-2/12 h-[42rem] p-2 bg-meMain text-meBlack2 m-4 rounded-xl"
       dir="rtl"
     >
-      <div className="flex justify-center p-7 border-b-2">
+      <div className="flex justify-center p-5 border-b-2 border-meBlackDot">
         <Link href={"/"}>
           <button>
             <img src="images/logo/logo.png" alt="" className="w-40" />
