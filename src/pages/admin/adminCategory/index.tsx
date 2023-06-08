@@ -63,7 +63,7 @@ const AdminCategory = () => {
       <div className="w-3/12 flex flex-col gap-10">
         <form
           action=""
-          className="bg-meMain p-4 py-8 rounded-xl w-full flex flex-col gap-4 items-center  "
+          className="bg-white p-4 py-8 rounded-xl w-full flex flex-col gap-4 items-center  "
           onSubmit={handleSubmit}
         >
           <h2 className="pb-8">اضافه کردن دسته بندی</h2>
@@ -71,7 +71,7 @@ const AdminCategory = () => {
             type="text"
             name="categoryName"
             placeholder="دسته بندی را وارد کنید"
-            className="p-2 rounded-xl w-full"
+            className="p-2 rounded-xl w-full bg-gray-100"
           />
           <button className=" text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2 w-full">
             اضافه کردن
@@ -80,22 +80,19 @@ const AdminCategory = () => {
         <form
           onSubmit={handleSubmitSub}
           action=""
-          className="bg-meMain p-4  flex flex-col py-8 rounded-xl gap-4 items-center"
+          className="bg-white p-4  flex flex-col py-8 rounded-xl gap-4 items-center"
         >
           <h2 className="pb-7">اضافه کردن زیرگروه</h2>
           <input
             type="text"
             name="subCategoryName"
             placeholder="زیر گروه را وارد کنید"
-            className="p-2 rounded-xl w-full"
+            className="p-2 rounded-xl w-full bg-gray-100"
           />
           <select
-            // onChange={(e) => {
-            //   setSelectCategory(e.target.value);
-            // }}
             name="selectCategory"
             id=""
-            className="p-2 rounded-xl w-full"
+            className="p-2 rounded-xl w-full bg-gray-100"
           >
             <option value="" selected hidden>
               دسته بندی

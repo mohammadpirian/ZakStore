@@ -134,7 +134,7 @@ const ProductTable = () => {
     },
   ];
   return (
-    <div className="w-9/12  bg-meMain rounded-xl p-4">
+    <div className="w-9/12  bg-white rounded-xl p-4">
       <div>
         <DataTable
           columns={columns}

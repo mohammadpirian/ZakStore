@@ -61,19 +61,7 @@ const AdminProducts = () => {
     error: error1,
   } = useQuery(["data1"], () => fetchData("/categories"));
 
-  // const useGetSubCategory = (categoryId) =>
-  //   useQuery(["data2"], () =>
-  //     fetchData(
-  //       `http://localhost:8000/api/subcategories?category=${categoryId}`
-  //     )
-  //   );
-
-  // const {
-  //   data: data2,
-  //   isLoading: isLoading2,
-  //   isError: isError2,
-  //   error: error2,
-  // } = useGetSubCategory(category);
+ 
 
   const {
     data: data2,
@@ -94,37 +82,37 @@ const AdminProducts = () => {
       <form
         onSubmit={handleSubmit}
         action=""
-        className="bg-meMain rounded-xl h-[35rem] flex flex-col gap-4 justify-center border-b-2 pb-4 w-3/12 px-3 py-6 h-full"
+        className="bg-white rounded-xl h-[38rem] flex flex-col gap-4 justify-center border-b-2 pb-4 w-3/12 px-3 py-3 "
       >
         <h1 className="text-center">اضافه کردن محصول</h1>
         <input
           type="text"
           name="nameProduct"
           placeholder="نام محصول را وارد کنید"
-          className="p-2 rounded-xl "
+          className="p-2 rounded-xl bg-gray-100"
         />
         <input
           type="text"
           name="priceProduct"
           placeholder="قیمت محصول را وارد کنید"
-          className="p-2 rounded-xl "
+          className="p-2 rounded-xl bg-gray-100"
         />
         <input
           type="text"
           name="quantityProduct"
           placeholder="موجودی محصول را وارد کنید"
-          className="p-2 rounded-xl "
+          className="p-2 rounded-xl bg-gray-100"
         />
         <input
           type="text"
           name="brandProduct"
           placeholder="برند محصول را وارد کنید"
-          className="p-2 rounded-xl "
+          className="p-2 rounded-xl bg-gray-100"
         />
         <select
           name="categoryProduct"
           id=""
-          className="p-2 rounded-xl "
+          className="p-2 rounded-xl bg-gray-100"
           onChange={(e) => {
             setCategory(e.target.value);
           }}
@@ -140,7 +128,7 @@ const AdminProducts = () => {
             );
           })}
         </select>
-        <select name="subCategoryProduct" id="" className="p-2 rounded-xl ">
+        <select name="subCategoryProduct" id="" className="p-2 rounded-xl bg-gray-100">
           <option selected hidden>
             زیر گروه
           </option>
@@ -156,7 +144,7 @@ const AdminProducts = () => {
           type="text"
           name="descriptionProduct"
           placeholder="توضیحات محصول را وارد کنید"
-          className="p-2 rounded-xl "
+          className="p-2 rounded-xl bg-gray-100"
         />
 
         <div className="relative  ">
@@ -164,10 +152,10 @@ const AdminProducts = () => {
             name="imagesProduct"
             multiple
             type="file"
-            className="absolute w-full h-full opacity-0"
+            className="absolute w-full h-full opacity-0 bg-gray-100"
             onChange={(e) => console.log(e.target.files)}
           />
-          <p className="w-full h-full text-center">{selectPhotoAdmin}</p>
+          <p className="w-full h-full text-cente p-2 rounded-xl bg-gray-100">{selectPhotoAdmin}</p>
         </div>
 
         <button className="w-full text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2">

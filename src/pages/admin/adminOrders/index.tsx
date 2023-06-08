@@ -9,7 +9,7 @@ import Cookies from "universal-cookie";
 
 const AdminOrders = () => {
   return (
-    <div className="p-4 bg-meMain mt-4 rounded-xl" dir="rtl">
+    <div className="p-4 bg-white mt-4 rounded-xl" dir="rtl">
       <OrderTable />
     </div>
   );

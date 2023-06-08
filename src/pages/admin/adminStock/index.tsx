@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 
 const AdminStock = () => {
   return (
-    <div className="mt-4 p-4 bg-meMain rounded-xl" dir="rtl">
+    <div className="mt-4 p-4 bg-white rounded-xl" dir="rtl">
       <StockTable />
     </div>
   );

@@ -8,8 +8,8 @@ interface Props {
 
 const AdminLayout = ({ children }: Props) => {
   return (
-    <div className="flex w-full">
-      <div className="flex flex-col w-10/12 px-8">
+    <div className="flex w-full bg-meMain h-full overflow-y-scroll">
+      <div className="flex flex-col w-10/12 px-8 bg-meMain ">
         <AdminNavbar />
         {children}
       </div>
