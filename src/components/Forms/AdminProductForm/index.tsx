@@ -1,5 +1,3 @@
-import { ProductTable } from "@/components";
-import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { ReactNode, useState } from "react";
@@ -16,7 +14,7 @@ const createProduct = async (productForm) => {
   return response.data;
 };
 
-const AdminProducts = () => {
+const AdminProductForm = () => {
   const [selectPhotoAdmin, setSelectPhotoAdmin] = useState("انتخاب عکس محصول");
   const mutation = useMutation(createProduct);
   const [category, setCategory] = useState("");
@@ -60,21 +58,6 @@ const AdminProducts = () => {
     isError: isError1,
     error: error1,
   } = useQuery(["data1"], () => fetchData("/categories"));
-
-  // const useGetSubCategory = (categoryId) =>
-  //   useQuery(["data2"], () =>
-  //     fetchData(
-  //       `http://localhost:8000/api/subcategories?category=${categoryId}`
-  //     )
-  //   );
-
-  // const {
-  //   data: data2,
-  //   isLoading: isLoading2,
-  //   isError: isError2,
-  //   error: error2,
-  // } = useGetSubCategory(category);
-
   const {
     data: data2,
     isLoading: isLoading2,
@@ -94,7 +77,7 @@ const AdminProducts = () => {
       <form
         onSubmit={handleSubmit}
         action=""
-        className="bg-meMain rounded-xl h-[35rem] flex flex-col gap-4 justify-center border-b-2 pb-4 w-3/12 px-3 py-6 h-full"
+        className="bg-meMain rounded-xl flex flex-col gap-4 justify-center border-b-2 pb-4  px-3 py-6 h-full"
       >
         <h1 className="text-center">اضافه کردن محصول</h1>
         <input
@@ -174,13 +157,8 @@ const AdminProducts = () => {
           اضافه کردن
         </button>
       </form>
-      <ProductTable />
     </div>
   );
 };
 
-AdminProducts.getLayout = function (page: ReactNode) {
-  return <AdminLayout>{page}</AdminLayout>;
-};
-
-export default AdminProducts;
+export default AdminProductForm;

@@ -80,7 +80,9 @@ const Navbar = () => {
       <div>
         <div className="flex h-full justify-between p-4 px-8 items-center bg-meMain text-meBlack2">
           <button>
-            <img src="images/logo/logo.png" alt="" className="w-40" />
+            <Link href="/">
+              <img src="/images/logo/logo.png" alt="" className="w-40" />
+            </Link>
           </button>
 
           <div className="flex gap-4 items-center">

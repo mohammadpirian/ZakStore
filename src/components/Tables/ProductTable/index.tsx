@@ -78,10 +78,9 @@ const ProductTable = () => {
   const columns = [
     {
       name: "عکس محصول",
-      selector: (row) => {
-        <img src={row.images[0]} className="w-4"></img>;
-
+      cell: (row) => {
         // console.log(row.images[0]);
+        return <img src={row.images[0]} className="w-16" />;
       },
     },
     {

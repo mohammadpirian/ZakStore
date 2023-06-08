@@ -1,4 +1,4 @@
-import CategoryTable from "@/components/Tables/CategoryTable";
+import { CategoryTable } from "@/components";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";

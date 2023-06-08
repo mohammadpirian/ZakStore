@@ -27,7 +27,6 @@ const Login = () => {
       const cookie = new Cookies();
       cookie.set("adminToken", response.data.token.accessToken);
       cookie.set("refreshToken", response.data.token.refreshToken);
-
       router.push("/admin");
       return response.data;
     } catch (error) {
