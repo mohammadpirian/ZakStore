@@ -79,7 +79,6 @@ const ProductTable = () => {
     {
       name: "عکس محصول",
       cell: (row) => {
-        // console.log(row.images[0]);
         return <img src={row.images[0]} className="w-16" />;
       },
     },

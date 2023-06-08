@@ -55,7 +55,6 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      
     },
     extend: {
       colors: {
@@ -77,6 +76,7 @@ module.exports = {
         meBlackDot: "#323232",
         meHalfBlack: "#565656",
         meBlueText: "#009EA8",
+        meRedBtn: "#FE4242",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

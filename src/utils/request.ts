@@ -28,7 +28,7 @@ request.interceptors.response.use(
       if (config.url !== "/auth/token" && config.url !== "/auth/loginAdmin") {
         const refreshToken = cookie.get("refreshToken");
         request.post("/auth/token", { refreshToken }).then((res) => {
-          const accessToken = res.data.token.accessToken;
+          const accessToken = res?.data.token.accessToken;
           cookie.set("adminToken", accessToken);
           // cookie.set("refreshToken", res.data.refreshToken);
           config.headers.Authorization = "Bearer " + accessToken;
