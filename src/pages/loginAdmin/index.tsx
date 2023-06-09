@@ -2,7 +2,7 @@ import { AuthLayout } from "@/layout";
 import { request } from "@/utils/request";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Cookies from "universal-cookie";
 
@@ -12,6 +12,8 @@ interface IFormInputs {
 }
 
 const Login = () => {
+  const [showError, setShowError] = useState("");
+
   const {
     register,
     formState: { errors },
@@ -30,12 +32,13 @@ const Login = () => {
       router.push("/admin");
       return response.data;
     } catch (error) {
-      router.push("/");
+      // router.push("/loginAdmin");
+      setShowError("رمز یا نام کاربری را اشتباه وارد کرده اید");
       console.log(error);
     }
   };
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    // console.log(data);
+    console.log(data);
     getLogin(data);
   };
 
@@ -56,6 +59,9 @@ const Login = () => {
         </div>
 
         <div className="w-[67%] flex flex-col justify-center">
+          <div className="flex justify-center">
+            <p className="text-red-600">{showError}</p>
+          </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             action=""
@@ -78,7 +84,7 @@ const Login = () => {
 
             <div className="w-full" dir="rtl">
               <input
-                type="text"
+                type="password"
                 placeholder="رمز عبور خود را وارد کنید"
                 className="border p-2 rounded-md w-full shadow-md"
                 dir="rtl"
