@@ -93,10 +93,14 @@ const StockTable = () => {
               <button onClick={() => handleSave(row, originalData)}>
                 ذخیره
               </button>
-              <button onClick={handleCancel}>بیخیال</button>
+              <button className="mx-2" onClick={handleCancel}>
+                بیخیال
+              </button>
             </>
           ) : (
-            <button onClick={() => handleEdit(row)}>ویرایش</button>
+            <button className="mx-2" onClick={() => handleEdit(row)}>
+              ویرایش
+            </button>
           )}
           <button onClick={() => handleDelete(row)}>حذف</button>
         </div>

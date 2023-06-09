@@ -9,18 +9,24 @@ const SingleProduct = () => {
     return response.data.data;
   };
   const router = useRouter();
+  
   // console.log(router.query.id);
+
   const {
     data: dataProduct,
     isLoading: isLoadingProduct,
     isError: isErrorProduct,
     error: errorProduct,
-  } = useQuery(["dataProduct"], () =>
-    fetchData(`/products/${router.query.id}`)
+  } = useQuery(
+    ["dataProduct", router.query.id],
+    () => fetchData(`/products/${router.query.id}`),
+    { enabled: !!router.query.id }
   );
 
   if (isLoadingProduct) {
-    return <div>Loading</div>;
+    return (
+      <div className="p-40 flex justify-center items-center">Loading...</div>
+    );
   }
   // console.log(dataProduct);
 
@@ -35,8 +41,8 @@ const SingleProduct = () => {
       </div>
       <div className="pt-10 px-10 flex flex-col gap-2">
         <p className="text-meBlueText py-4 text-sm">
-          {dataProduct?.product.category.name} /
-          {dataProduct?.product.subcategory.name}
+          {dataProduct?.product?.category.name} /
+          {dataProduct?.product?.subcategory.name}
         </p>
         <h1 className="text-2xl">{dataProduct?.product.name}</h1>
         <p className="text-meHalfBlack mt-4 text-sm">

@@ -29,7 +29,7 @@ const ProductTable = () => {
     isError: isError2,
     error: error2,
   } = useQuery(["data2"], () => fetchData("/subcategories?limit=all"));
-
+  const [records, setRecords] = useState();
   const [editRow, setEditRow] = useState(null);
   const [originalData, setOriginalData] = useState(dataProduct?.products);
 
@@ -115,31 +115,47 @@ const ProductTable = () => {
     },
 
     {
-      name: "function",
+      name: "تغییرات",
       cell: (row) => (
         <div>
           {editRow === row._id ? (
             <>
               <button onClick={() => handleSave(row, originalData)}>
-                Save
+                ذخیره
               </button>
-              <button onClick={handleCancel}>cancel</button>
+              <button className="mx-2" onClick={handleCancel}>
+                بیخیال
+              </button>
             </>
           ) : (
-            <button onClick={() => handleEdit(row)}>Edit</button>
+            <button className="mx-2" onClick={() => handleEdit(row)}>
+              ویرایش
+            </button>
           )}
-          <button onClick={() => handleDelete(row)}>Delete</button>
+          <button onClick={() => handleDelete(row)}>حذف</button>
         </div>
       ),
     },
   ];
+  function handleFilter(event) {
+    const newData = dataProduct?.products.filter((row) => {
+      return row.name.toLowerCase().includes(event.target.value.toLowerCase());
+    });
+    setRecords(newData);
+  }
   return (
     <div className="w-9/12  bg-white rounded-xl p-4">
+      <input
+        type="text"
+        className="py-2 px-4 bg-gray-100 rounded-lg"
+        placeholder="جستجو"
+        onChange={handleFilter}
+      />
       <div>
         <DataTable
           columns={columns}
           // data={data}
-          data={dataProduct?.products}
+          data={records || dataProduct?.products}
           //   selectableRows
           fixedHeader
           pagination

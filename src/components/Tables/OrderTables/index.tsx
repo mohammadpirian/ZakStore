@@ -7,6 +7,7 @@ import DataTable from "react-data-table-component";
 import Cookies from "universal-cookie";
 
 const OrderTable = () => {
+  const [filterOrder, setFilterOrder] = useState(false);
   const cookie = new Cookies();
   const accessToken = cookie.get("adminToken");
 
@@ -31,7 +32,9 @@ const OrderTable = () => {
     isLoading: isLoadingorders,
     isError: isErrororders,
     error: errororders,
-  } = useQuery(["dataorders"], () => fetchData("/orders"));
+  } = useQuery(["dataorders", filterOrder], () =>
+    fetchData(`/orders?deliveryStatus=${filterOrder}`)
+  );
 
   if (isLoadingorders || isLoadinguser) {
     return <div>Loading...</div>;
@@ -52,12 +55,33 @@ const OrderTable = () => {
       sortable: true,
     },
     {
-      name: "function",
+      name: "بررسی",
       cell: (row) => <button>بررسی سفارش</button>,
     },
   ];
   return (
     <div className="" dir="rtl">
+      <div>
+        <button
+          onClick={() => setFilterOrder(false)}
+          className={`p-2 text-sm rounded-md ${
+            filterOrder == false ? "bg-meButtonBlack text-white" : ""
+          }`}
+        >
+          سفارش های درانتظار
+        </button>
+        <button
+          onClick={() => {
+            setFilterOrder(true);
+            console.log("mamad");
+          }}
+          className={`p-2 text-sm rounded-md ${
+            filterOrder == true ? "bg-meButtonBlack text-white" : ""
+          }`}
+        >
+          سفارش های مرسوله
+        </button>
+      </div>
       <DataTable
         columns={columns}
         // data={data}
