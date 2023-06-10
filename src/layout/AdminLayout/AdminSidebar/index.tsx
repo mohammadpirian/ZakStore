@@ -8,16 +8,25 @@ import {
   MdOutlineCategory,
   MdLogout,
 } from "react-icons/md";
+import Cookies from "universal-cookie";
 
 const AdminSidebar = () => {
   const [rout, setrout] = useState("");
   const router = useRouter();
+  const cookie = new Cookies();
+
+  const handleExit = () => {
+    
+    // cookie.remove("adminToken");
+    // cookie.remove("refreshToken");
+    router.push("/");
+  };
 
   useEffect(() => {
     setrout(router.pathname);
   }, [router.pathname]);
 
-  console.log(rout);
+  // console.log(rout);
 
   return (
     <div
@@ -83,9 +92,8 @@ const AdminSidebar = () => {
           }`}
         >
           <MdLogout className="w-6 h-6" />
-          <Link href={"/"}>
-            <span>خروج</span>
-          </Link>
+
+          <span onClick={handleExit}>خروج</span>
         </button>
       </div>
       <div className="flex flex-col items-center pt-32">

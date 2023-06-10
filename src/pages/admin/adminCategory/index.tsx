@@ -4,14 +4,22 @@ import { request } from "@/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { ReactNode, useState } from "react";
 
-const createCategory = async (categoryName) => {
+interface InputAdminCategory {
+  selectCategory: string;
+  subCategoryName: string;
+}
+
+const createCategory = async (categoryName: string) => {
   const response = await request.post("/categories", {
     name: categoryName,
   });
   return response.data;
 };
 // ==================
-const createSubCategory = async ({ selectCategory, subCategoryName }) => {
+const createSubCategory = async ({
+  selectCategory,
+  subCategoryName,
+}: InputAdminCategory) => {
   console.log(subCategoryName);
   const response = await request.post("/subcategories", {
     category: selectCategory,
@@ -29,7 +37,7 @@ const AdminCategory = () => {
   // const [selectCategory, setSelectCategory] = useState("");
   const mutation = useMutation(createCategory);
   const { mutate: mutationsub } = useMutation({
-    mutationKey: "subCategory",
+    // mutationKey: "subCategory",
     mutationFn: createSubCategory,
   });
 

@@ -44,17 +44,20 @@ const CategoryTable = () => {
     }
   };
 
-  const handleEdit = (row) => {
+  const handleEdit = (row: RowCategoryTable) => {
     setEditRow(row._id);
     // handleSave(row);
   };
 
-  const handleCancel = (row) => {
+  const handleCancel = () => {
     setEditRow(null);
   };
 
-  const handleInputChange = (event, row) => {
-    const updatedData = data1.categories.map((item) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    row: RowCategoryTable
+  ) => {
+    const updatedData = data1.categories.map((item: RowCategoryTable) => {
       if (item._id === row._id) {
         return { ...item, name: event.target.value };
       }
@@ -64,17 +67,23 @@ const CategoryTable = () => {
   };
 
   const columns = [
-    { name: "شناسه", selector: (row) => row._id, sortable: true },
+    {
+      name: "شناسه",
+      selector: (row: RowCategoryTable) => row._id,
+      sortable: true,
+    },
     {
       name: "دسته بندی",
 
-      selector: (row) =>
+      selector: (row: RowCategoryTable) =>
         editRow === row._id ? (
           <input
             type="text"
             value={
               (originalData &&
-                originalData.find((item) => item._id === row._id)?.name) ||
+                originalData.find(
+                  (item: RowCategoryTable) => item._id === row._id
+                )?.name) ||
               ""
             }
             onChange={(event) => handleInputChange(event, row)}
@@ -86,7 +95,7 @@ const CategoryTable = () => {
     },
     {
       name: "تغییرات",
-      cell: (row) => (
+      cell: (row: RowCategoryTable) => (
         <div>
           {editRow === row._id ? (
             <>

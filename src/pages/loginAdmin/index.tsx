@@ -38,7 +38,7 @@ const Login = () => {
     }
   };
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    console.log(data);
+    // console.log(data);
     getLogin(data);
   };
 

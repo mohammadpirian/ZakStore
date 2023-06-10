@@ -25,7 +25,7 @@ request.interceptors.response.use(
     // console.log("config", config);
     if (error.response.status === 401 && !config.sent) {
       config.sent = true;
-      if (config.url !== "/auth/token" && config.url !== "/auth/loginAdmin") {
+      if (config.url !== "/auth/token" && config.url !== "/auth/login") {
         const refreshToken = cookie.get("refreshToken");
         request.post("/auth/token", { refreshToken }).then((res) => {
           const accessToken = res?.data.token.accessToken;
