@@ -8,7 +8,7 @@ const fetchData = async (url: string) => {
   return response.data.data;
 };
 
-const CardSlider = ({ item }: any) => {
+const CardSlider = ({ item }: GetCategory) => {
   const {
     data: dataProduct,
     isLoading: isLoadingProduct,
@@ -33,7 +33,7 @@ const CardSlider = ({ item }: any) => {
         >
           <div className="flex flex-col px-32 gap-20 items-center">
             <h1 className="text-xl">{item.name}</h1>
-            <button className="border border-black p-2 bg-meWhite hover:bg-meBlack2 hover:text-meWhite">
+            <button className="border border-black p-2  hover:bg-meBlack2 hover:text-meMain">
               مشاهده همه
             </button>
           </div>

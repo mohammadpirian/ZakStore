@@ -1,8 +1,9 @@
 import { CategoryTable } from "@/components";
+import useGetCategory from "@/hooks/useGetCategory";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import React, { ReactNode, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import React, { ReactNode } from "react";
 
 interface InputAdminCategory {
   selectCategory: string;
@@ -28,25 +29,23 @@ const createSubCategory = async ({
   return response.data;
 };
 
-const fetchData = async (url: string) => {
-  const response = await request.get(url);
-  return response.data.data;
-};
-
 const AdminCategory = () => {
+  const {
+    data: category,
+    isLoading: isLoadingcategory,
+    isError: isErrorcategory,
+    error: errorcategory,
+  } = useGetCategory();
+  // const queryClient = useQueryClient();
+  // const category = queryClient.getQueryData(["data1"]);
+  // console.log(data1);
+
   // const [selectCategory, setSelectCategory] = useState("");
   const mutation = useMutation(createCategory);
   const { mutate: mutationsub } = useMutation({
     // mutationKey: "subCategory",
     mutationFn: createSubCategory,
   });
-
-  const {
-    data: data1,
-    isLoading: isLoading1,
-    isError: isError1,
-    error: error1,
-  } = useQuery(["data1"], () => fetchData("/categories"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,11 +57,10 @@ const AdminCategory = () => {
     e.preventDefault();
     const subCategoryName = e.target.elements.subCategoryName.value;
     const selectCategory = e.target.elements.selectCategory.value;
-    console.log(subCategoryName, selectCategory);
     mutationsub({ selectCategory, subCategoryName });
   };
 
-  if (isLoading1) {
+  if (isLoadingcategory) {
     return <div>Loading...</div>;
   }
 
@@ -105,7 +103,7 @@ const AdminCategory = () => {
             <option value="" selected hidden>
               دسته بندی
             </option>
-            {data1?.categories.map((item) => {
+            {category?.categories.map((item) => {
               return (
                 <option key={item._id} value={item._id}>
                   {item.name}

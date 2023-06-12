@@ -1,55 +1,66 @@
+import useGetProductById from "@/hooks/useGetProductById";
 import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import React from "react";
 
 const SingleProduct = () => {
-  const fetchData = async (url: string) => {
-    const response = await request.get(url);
-    return response.data.data;
-  };
+  // const fetchData = async (url: string) => {
+  //   const response = await request.get(url);
+  //   return response.data.data;
+  // };
   const router = useRouter();
-  
+
   // console.log(router.query.id);
 
+  // const {
+  //   data: dataProduct,
+  //   isLoading: isLoadingProduct,
+  //   isError: isErrorProduct,
+  //   error: errorProduct,
+  // } = useQuery(
+  //   ["dataProduct", router.query.id],
+  //   () => fetchData(`/products/${router.query.id}`),
+  //   { enabled: !!router.query.id }
+  // );
+
+  type RouterId = string | undefined;
+
   const {
-    data: dataProduct,
+    data: product,
     isLoading: isLoadingProduct,
     isError: isErrorProduct,
     error: errorProduct,
-  } = useQuery(
-    ["dataProduct", router.query.id],
-    () => fetchData(`/products/${router.query.id}`),
-    { enabled: !!router.query.id }
-  );
+  } = useGetProductById(router.query.id as RouterId);
+  // console.log(router.query.id);
 
   if (isLoadingProduct) {
     return (
       <div className="p-40 flex justify-center items-center">Loading...</div>
     );
   }
-  // console.log(dataProduct);
+  // console.log(product);
 
   return (
     <div className="pt-16 flex p-8 bg-meMain" dir="rtl">
       <div className=" mt-8">
         <img
-          src={dataProduct?.product?.images[0]}
+          src={product?.product?.images[0]}
           alt=""
           className="w-[32rem] shadow-xl"
         />
       </div>
       <div className="pt-10 px-10 flex flex-col gap-2">
         <p className="text-meBlueText py-4 text-sm">
-          {dataProduct?.product?.category.name} /
-          {dataProduct?.product?.subcategory.name}
+          {product?.product?.category.name} /
+          {product?.product?.subcategory.name}
         </p>
-        <h1 className="text-2xl">{dataProduct?.product.name}</h1>
+        <h1 className="text-2xl">{product?.product.name}</h1>
         <p className="text-meHalfBlack mt-4 text-sm">
-          برند : {dataProduct?.product.brand}
+          برند : {product?.product.brand}
         </p>
         <p className="text-meHalfBlack text-sm">
-          ویژگی : {dataProduct?.product.description}
+          ویژگی : {product?.product.description}
         </p>
         <p className="mt-4">رنگ بندی :</p>
         <div className="flex gap-2 mt-2">
@@ -94,7 +105,7 @@ const SingleProduct = () => {
         </div>
         <div className="border-t border-meButtonBlack py-4 mt-4">
           <p className="text-xs px-8">
-            امکان برگشت کالا در گروه لباس با دلیل "انصراف از خرید" تنها در صورتی
+            امکان برگشت کالا در گروه لباس با دلیل انصراف از خرید تنها در صورتی
             مورد قبول است که پلمب کالا باز نشده باشد. تمام لباس‌های زاک استور
             ضمانت اورجینال دارند. در صورت وجود مشکل اورجینال، می‌توانید بعد از
             مهلت قانونی ۳۰ روزه، لباس خریداری‌شده را مرجوع کنید.
@@ -114,15 +125,17 @@ const SingleProduct = () => {
         <div className="flex flex-col gap-2 border-b py-2 border-meButtonBlack">
           <p className="text-sm font-semibold">موجود در انبار زاک استور</p>
           <p className="text-xs text-meBlueText">
-            {dataProduct?.product.quantity} عدد در انبار زاک استور
+            {product?.product.quantity} عدد در انبار زاک استور
           </p>
           <p className="text-xs">ارسال زاک استور تراک</p>
           <p className="text-xs">ارسال فوری (شهر تهران)</p>
         </div>
         <div className="flex flex-col gap-16 py-4">
-          <p className="flex gap-2 text-xs items-center">
+          <p className="flex gap-1 text-xs ">
             قیمت محصول :
-            <span className="text-base mr-6">{dataProduct?.product.price}</span>{" "}
+            <span className="text-sm mr-6 text-meBlueText">
+              {product?.product.price}
+            </span>{" "}
             <span>تومان</span>
           </p>
           <button className="p-2 bg-meRedBtn text-white rounded-lg">

@@ -1,4 +1,5 @@
 import { ProductTable } from "@/components";
+import useGetCategory from "@/hooks/useGetCategory";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -19,7 +20,8 @@ const createProduct = async (productForm) => {
 const AdminProducts = () => {
   const [selectPhotoAdmin, setSelectPhotoAdmin] = useState("انتخاب عکس محصول");
   const mutation = useMutation(createProduct);
-  const [category, setCategory] = useState("");
+  const [inputCategory, setInputCategory] = useState("");
+  // const [category, setCategory] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,11 +57,11 @@ const AdminProducts = () => {
   };
 
   const {
-    data: data1,
-    isLoading: isLoading1,
-    isError: isError1,
-    error: error1,
-  } = useQuery(["data1"], () => fetchData("/categories"));
+    data: category,
+    isLoading: isLoadingcategory,
+    isError: isErrorcategory,
+    error: errorcategory,
+  } = useGetCategory();
 
  
 
@@ -69,12 +71,12 @@ const AdminProducts = () => {
     isError: isError2,
     error: error2,
   } = useQuery(
-    ["data2", category],
-    () => fetchData(`/subcategories?category=${category}`),
-    { enabled: !!category }
+    ["data2", inputCategory],
+    () => fetchData(`/subcategories?category=${inputCategory}`),
+    { enabled: !!inputCategory }
   );
 
-  if (isLoading1) {
+  if (isLoadingcategory) {
     return <div>Loading...</div>;
   }
   return (
@@ -114,13 +116,13 @@ const AdminProducts = () => {
           id=""
           className="p-2 rounded-xl bg-gray-100"
           onChange={(e) => {
-            setCategory(e.target.value);
+            setInputCategory(e.target.value);
           }}
         >
           <option selected hidden>
             گروه بندی
           </option>
-          {data1?.categories.map((item) => {
+          {category?.categories.map((item) => {
             return (
               <option key={item._id} value={item._id}>
                 {item.name}

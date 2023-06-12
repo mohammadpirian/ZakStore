@@ -1,4 +1,5 @@
 import SubCategory from "@/components/SubCategory";
+import useGetCategory from "@/hooks/useGetCategory";
 import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
@@ -56,18 +57,18 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const {
-    data: data1,
-    isLoading: isLoading1,
-    isError: isError1,
-    error: error1,
-  } = useQuery(["data1"], () => fetchData("/categories"));
+    data: category,
+    isLoading: isLoadingcategory,
+    isError: isErrorcategory,
+    error: errorcategory,
+  } = useGetCategory();
 
-  if (isLoading1) {
+  if (isLoadingcategory) {
     return <div>Loading...</div>;
   }
-  if (isError1) {
-    return <div>Error:{error1}</div>;
-  }
+  // if (isError1) {
+  //   return <div>Error:{error1}</div>;
+  // }
 
   // console.log(data1.categories);
 
@@ -115,8 +116,8 @@ const Navbar = () => {
         {isDropdownOpen && (
           <div className="animation origin-top shadow-lg bg-meMain text-meBlack2">
             <div className=" px-8 p-2 flex justify-between ">
-              {data1.categories &&
-                data1.categories.map((item) => {
+              {category.categories &&
+                category.categories.map((item: GetCategory) => {
                   return (
                     <div key={item._id} className="flex flex-col gap-1">
                       <h2 className="border-b px-8">{item.name}</h2>
