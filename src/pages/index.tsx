@@ -29,9 +29,11 @@ export default function Home() {
       <main className="pt-16 bg-meMain">
         <CategoryRow />
         <Slider />
-        {data1?.categories.map((item) => {
-          return <CardSlider key={item._id} item={item} />;
-        })}
+        {data1.categories &&
+          data1?.categories.map((item) => {
+            console.log(item);
+            return <CardSlider key={item._id} item={item} />;
+          })}
       </main>
     </>
   );

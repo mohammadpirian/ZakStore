@@ -8,7 +8,7 @@ const fetchData = async (url: string) => {
   return response.data.data;
 };
 
-const CardSlider = ({ item }: GetCategory) => {
+const CardSlider = ({ item }: { item: GetCategory }) => {
   const {
     data: dataProduct,
     isLoading: isLoadingProduct,
@@ -38,14 +38,14 @@ const CardSlider = ({ item }: GetCategory) => {
             </button>
           </div>
           <div className="flex gap-8 p-8">
-            {dataProduct?.products.map((item) => {
+            {dataProduct?.products.map((item: GetAllProduct) => {
               return <CardForSlider key={item._id} item={item} />;
             })}
           </div>
         </div>
       </div>
     );
-  }
+  } else return <div></div>;
 };
 
 export default CardSlider;
