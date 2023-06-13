@@ -1,4 +1,5 @@
 import { Button } from "@/components";
+import useGetCategory from "@/hooks/useGetCategory";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
@@ -18,22 +19,23 @@ const ProductTable = () => {
     error: errorProduct,
   } = useQuery(["dataProduct"], () => fetchData("/products?limit=all"));
   const {
-    data: data1,
-    isLoading: isLoading1,
-    isError: isError1,
-    error: error1,
-  } = useQuery(["data1"], () => fetchData("/categories"));
+    data: category,
+    isLoading: isLoadingcategory,
+    isError: isErrorcategory,
+    error: errorcategory,
+  } = useGetCategory();
   const {
     data: data2,
     isLoading: isLoading2,
     isError: isError2,
     error: error2,
   } = useQuery(["data2"], () => fetchData("/subcategories?limit=all"));
+  const [openModalProduct, setOpenModalProduct] = useState();
   const [records, setRecords] = useState();
   const [editRow, setEditRow] = useState(null);
   const [originalData, setOriginalData] = useState(dataProduct?.products);
 
-  if (isLoadingProduct || isLoading1 || isLoading2) {
+  if (isLoadingProduct || isLoadingcategory || isLoading2) {
     return <div>Loading...</div>;
   }
 
@@ -79,7 +81,12 @@ const ProductTable = () => {
     {
       name: "عکس محصول",
       cell: (row) => {
-        return <img src={row.images[0]} className="w-16" />;
+        return (
+          <img
+            src={`${process.env.BASE_IMAGE_URL}${row.images[0]}`}
+            className="w-16"
+          />
+        );
       },
     },
     {
@@ -103,8 +110,9 @@ const ProductTable = () => {
     {
       name: "گروه بندی",
       selector: (row) =>
-        data1.categories.filter((category) => category._id == row.category)[0]
-          .name,
+        category.categories.filter(
+          (category) => category._id == row.category
+        )[0].name,
       sortable: true,
     },
     {

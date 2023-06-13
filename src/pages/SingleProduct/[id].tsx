@@ -45,7 +45,7 @@ const SingleProduct = () => {
     <div className="pt-16 flex p-8 bg-meMain" dir="rtl">
       <div className=" mt-8">
         <img
-          src={product?.product?.images[0]}
+          src={`${process.env.BASE_IMAGE_URL}${product?.product?.images[0]}`}
           alt=""
           className="w-[32rem] shadow-xl"
         />

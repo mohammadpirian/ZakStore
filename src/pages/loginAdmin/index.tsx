@@ -22,7 +22,7 @@ const Login = () => {
 
   const router = useRouter();
 
-  const getLogin = async (data) => {
+  const getLogin = async (data: IFormInputs) => {
     try {
       const response = await request.post("/auth/login", data);
       // console.log(response.data);
@@ -38,7 +38,7 @@ const Login = () => {
     }
   };
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    // console.log(data);
+    console.log(data);
     getLogin(data);
   };
 

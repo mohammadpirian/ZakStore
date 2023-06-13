@@ -6,11 +6,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { ReactNode, useState } from "react";
 import Cookies from "universal-cookie";
 
-const createProduct = async (productForm) => {
+const createProduct = async (productForm: FormData) => {
   const cookie = new Cookies();
   const response = await request.post("/products", productForm, {
     headers: {
-      "Content-Type": `multipart/form-data ; boundary=${productForm._boundary}`,
+      // "Content-Type": `multipart/form-data ; boundary=${productForm._boundary}`,
       Authorization: `Bearer ${cookie.get("adminToken")}`,
     },
   });
@@ -23,7 +23,7 @@ const AdminProducts = () => {
   const [inputCategory, setInputCategory] = useState("");
   // const [category, setCategory] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     const nameProduct = e.target.elements.nameProduct.value;
     const priceProduct = e.target.elements.priceProduct.value;
@@ -62,8 +62,6 @@ const AdminProducts = () => {
     isError: isErrorcategory,
     error: errorcategory,
   } = useGetCategory();
-
- 
 
   const {
     data: data2,
@@ -130,7 +128,11 @@ const AdminProducts = () => {
             );
           })}
         </select>
-        <select name="subCategoryProduct" id="" className="p-2 rounded-xl bg-gray-100">
+        <select
+          name="subCategoryProduct"
+          id=""
+          className="p-2 rounded-xl bg-gray-100"
+        >
           <option selected hidden>
             زیر گروه
           </option>
@@ -157,7 +159,9 @@ const AdminProducts = () => {
             className="absolute w-full h-full opacity-0 bg-gray-100"
             onChange={(e) => console.log(e.target.files)}
           />
-          <p className="w-full h-full text-cente p-2 rounded-xl bg-gray-100">{selectPhotoAdmin}</p>
+          <p className="w-full h-full text-cente p-2 rounded-xl bg-gray-100">
+            {selectPhotoAdmin}
+          </p>
         </div>
 
         <button className="w-full text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2">
