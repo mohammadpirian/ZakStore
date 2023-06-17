@@ -9,9 +9,9 @@ import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductTable = () => {
-  const { openModal, product } = useSelector((state) => state.modalReducer);
+  // const { openModal, product } = useSelector((state) => state.modalReducer);
   const [modal, setModal] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // console.log(openModal, product);
   const client = useQueryClient();
   const { mutate } = useMutation({
@@ -55,40 +55,11 @@ const ProductTable = () => {
     return response.data;
   };
 
-  const handleSave = async (row, originalData) => {
-    setEditRow(null);
-    const updatedRow = originalData?.find((item) => item._id === row._id);
-    if (!updatedRow) {
-      return;
-    }
-
-    try {
-      // console.log(updatedRow.name);
-      await request.patch(`/products/${row._id}`, { name: updatedRow.name });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleEdit = (row) => {
     setEditRow(row._id);
     // dispatch(handeleOpenModal(row));
     setModal(row);
     // handleSave(row);
-  };
-
-  const handleCancel = (row) => {
-    setEditRow(null);
-  };
-
-  const handleInputChange = (event, row) => {
-    const updatedData = dataProduct.products.map((item) => {
-      if (item._id === row._id) {
-        return { ...item, name: event.target.value };
-      }
-      return item;
-    });
-    setOriginalData(updatedData);
   };
 
   const columns = [
@@ -105,20 +76,7 @@ const ProductTable = () => {
     },
     {
       name: "نام محصول",
-      selector: (row) =>
-        editRow === row._id ? (
-          <input
-            type="text"
-            value={
-              (originalData &&
-                originalData.find((item) => item._id === row._id)?.name) ||
-              ""
-            }
-            onChange={(event) => handleInputChange(event, row)}
-          />
-        ) : (
-          row.name
-        ),
+      selector: (row) => row.name,
       sortable: true,
     },
     {
@@ -140,25 +98,14 @@ const ProductTable = () => {
       name: "تغییرات",
       cell: (row) => (
         <div>
-          {editRow === row._id ? (
-            <>
-              <button onClick={() => handleSave(row, originalData)}>
-                ذخیره
-              </button>
-              <button className="mx-2" onClick={handleCancel}>
-                بیخیال
-              </button>
-            </>
-          ) : (
-            <button
-              className="mx-2"
-              onClick={() => {
-                handleEdit(row);
-              }}
-            >
-              ویرایش
-            </button>
-          )}
+          <button
+            className="mx-2"
+            onClick={() => {
+              handleEdit(row);
+            }}
+          >
+            ویرایش
+          </button>
           <button onClick={() => mutate(row._id)}>حذف</button>
         </div>
       ),

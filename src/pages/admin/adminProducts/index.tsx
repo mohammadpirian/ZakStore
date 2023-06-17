@@ -1,4 +1,5 @@
 import { EditProductModal, ProductTable } from "@/components";
+import ImageViewer from "@/components/ImageViewer";
 import useGetCategory from "@/hooks/useGetCategory";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
@@ -164,13 +165,12 @@ const AdminProducts = () => {
             {selectPhotoAdmin}
           </p>
         </div>
-
+        {/* <ImageViewer /> */}
         <button className="w-full text-center bg-meGreen hover:bg-meWhite hover:text-meGreen hover:border-2 hover:border-meGreen text-meWhite rounded-xl p-2">
           اضافه کردن
         </button>
       </form>
       <ProductTable />
-      
     </div>
   );
 };
