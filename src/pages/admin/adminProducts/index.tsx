@@ -1,4 +1,4 @@
-import { ProductTable } from "@/components";
+import { EditProductModal, ProductTable } from "@/components";
 import useGetCategory from "@/hooks/useGetCategory";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
@@ -24,6 +24,7 @@ const AdminProducts = () => {
   // const [category, setCategory] = useState("");
 
   const handleSubmit = (e: any) => {
+    // console.log(e.target.elements.nameProduct.value);
     e.preventDefault();
     const nameProduct = e.target.elements.nameProduct.value;
     const priceProduct = e.target.elements.priceProduct.value;
@@ -120,7 +121,7 @@ const AdminProducts = () => {
           <option selected hidden>
             گروه بندی
           </option>
-          {category?.categories.map((item) => {
+          {category?.categories.map((item: GetCategory) => {
             return (
               <option key={item._id} value={item._id}>
                 {item.name}
@@ -136,7 +137,7 @@ const AdminProducts = () => {
           <option selected hidden>
             زیر گروه
           </option>
-          {data2?.subcategories.map((item) => {
+          {data2?.subcategories.map((item: GetSubCategory) => {
             return (
               <option key={item._id} value={item._id}>
                 {item.name}
@@ -169,6 +170,7 @@ const AdminProducts = () => {
         </button>
       </form>
       <ProductTable />
+      
     </div>
   );
 };

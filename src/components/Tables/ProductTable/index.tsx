@@ -1,17 +1,29 @@
-import { Button } from "@/components";
+import { handeleOpenModal } from "@/Redux/slices/modalSlices";
+import { EditProductModal } from "@/components/Modal";
 import useGetCategory from "@/hooks/useGetCategory";
-import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 import React, { ReactNode, useState } from "react";
 import DataTable from "react-data-table-component";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductTable = () => {
+  const { openModal, product } = useSelector((state) => state.modalReducer);
+  const [modal, setModal] = useState(false);
+  const dispatch = useDispatch();
+  // console.log(openModal, product);
+  const client = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (id) => handleDelete(id),
+    onSuccess: () => client.invalidateQueries({ queryKey: ["dataProduct"] }),
+  });
+
   const fetchData = async (url: string) => {
     const response = await request.get(url);
     return response.data.data;
   };
-
+  const router = useRouter();
   const {
     data: dataProduct,
     isLoading: isLoadingProduct,
@@ -30,7 +42,6 @@ const ProductTable = () => {
     isError: isError2,
     error: error2,
   } = useQuery(["data2"], () => fetchData("/subcategories?limit=all"));
-  const [openModalProduct, setOpenModalProduct] = useState();
   const [records, setRecords] = useState();
   const [editRow, setEditRow] = useState(null);
   const [originalData, setOriginalData] = useState(dataProduct?.products);
@@ -39,8 +50,9 @@ const ProductTable = () => {
     return <div>Loading...</div>;
   }
 
-  const handleDelete = (row) => {
-    request.delete(`/products/${row._id}`);
+  const handleDelete = async (id) => {
+    const response = await request.delete(`/products/${id}`);
+    return response.data;
   };
 
   const handleSave = async (row, originalData) => {
@@ -60,6 +72,8 @@ const ProductTable = () => {
 
   const handleEdit = (row) => {
     setEditRow(row._id);
+    // dispatch(handeleOpenModal(row));
+    setModal(row);
     // handleSave(row);
   };
 
@@ -136,11 +150,16 @@ const ProductTable = () => {
               </button>
             </>
           ) : (
-            <button className="mx-2" onClick={() => handleEdit(row)}>
+            <button
+              className="mx-2"
+              onClick={() => {
+                handleEdit(row);
+              }}
+            >
               ویرایش
             </button>
           )}
-          <button onClick={() => handleDelete(row)}>حذف</button>
+          <button onClick={() => mutate(row._id)}>حذف</button>
         </div>
       ),
     },
@@ -169,6 +188,7 @@ const ProductTable = () => {
           pagination
         ></DataTable>
       </div>
+      {modal && <EditProductModal modal={modal} setModal={setModal} />}
     </div>
   );
 };

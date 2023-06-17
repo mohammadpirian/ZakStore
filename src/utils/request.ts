@@ -32,7 +32,7 @@ request.interceptors.response.use(
           // add this 1 line================-------------==================
           cookie.remove("adminToken");
           // ================-------------==================
-          cookie.set("adminToken", accessToken);
+          cookie.set("adminToken", accessToken, { path: "/" });
           // cookie.set("refreshToken", res.data.refreshToken);
           config.headers.Authorization = "Bearer " + accessToken;
           return request(config);

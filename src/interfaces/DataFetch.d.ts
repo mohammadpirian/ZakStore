@@ -6,6 +6,16 @@ interface GetCategory {
   updatedAt?: string;
   slugname?: string;
 }
+
+interface GetSubCategory {
+  _id?: string;
+  category?: string;
+  name?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  slugname?: string;
+}
+
 interface RowCategoryTable {
   _id?: string;
   name?: string;
@@ -27,4 +37,20 @@ interface GetAllProduct {
   thumbnail?: string;
   images?: string[];
   slugname?: string;
+}
+interface GetPropsProduct {
+  brand: string;
+  category: string;
+  createdAt: string;
+  description: string;
+  images: string[];
+  name: string;
+  price: number;
+  quantity: number;
+  rating: { rate: number; count: number };
+  slugname: string;
+  subcategory: string;
+  thumbnail: string;
+  updatedAt: string;
+  _id: string;
 }
