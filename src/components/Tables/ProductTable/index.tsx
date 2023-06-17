@@ -43,7 +43,6 @@ const ProductTable = () => {
     error: error2,
   } = useQuery(["data2"], () => fetchData("/subcategories?limit=all"));
   const [records, setRecords] = useState();
-  const [editRow, setEditRow] = useState(null);
   const [originalData, setOriginalData] = useState(dataProduct?.products);
 
   if (isLoadingProduct || isLoadingcategory || isLoading2) {
@@ -56,10 +55,8 @@ const ProductTable = () => {
   };
 
   const handleEdit = (row) => {
-    setEditRow(row._id);
-    // dispatch(handeleOpenModal(row));
     setModal(row);
-    // handleSave(row);
+    // dispatch(handeleOpenModal(row));
   };
 
   const columns = [

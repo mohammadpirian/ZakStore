@@ -3,7 +3,7 @@
 // import { useDispatch, useSelector } from "react-redux";
 import ImageViewer from "@/components/ImageViewer";
 import { request } from "@/utils/request";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import Cookies from "universal-cookie";
 
@@ -21,17 +21,28 @@ const EditProductModal = ({ modal, setModal }: Props) => {
     const cookie = new Cookies();
     // console.log(Object.fromEntries(productForm));
 
-    const response = await request.patch(`/products/${modal._id}`, productForm, {
-      headers: {
-        Authorization: `Bearer ${cookie.get("adminToken")}`,
-      },
-    });
+    const response = await request.patch(
+      `/products/${modal._id}`,
+      productForm,
+      {
+        headers: {
+          Authorization: `Bearer ${cookie.get("adminToken")}`,
+        },
+      }
+    );
+    setModal(false)
     return response.data;
   };
 
   const [imageFiles, setImageFiles] = useState([]);
   const [images, setImages] = useState([]);
-  const mutation = useMutation(editProduct);
+
+  const client = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: editProduct,
+    onSuccess: () => client.invalidateQueries({ queryKey: ["dataProduct"] }),
+  });
+  // const mutation = useMutation(editProduct);
 
   const handleSubmit = (e: any) => {
     // console.log(e.target.elements.nameProduct.value);
@@ -50,7 +61,7 @@ const EditProductModal = ({ modal, setModal }: Props) => {
     mutation.mutate(productForm);
   };
 
-  console.log(imageFiles);
+  // console.log(imageFiles);
   return (
     <div
       className={`absolute top-0 left-0 w-screen h-screen  justify-center items-center backdrop-blur-sm h-80 z-10  ${
