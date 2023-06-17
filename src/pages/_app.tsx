@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import store from "@/Redux/configStore/store";
 import { NextPage } from "next";
 import { ComponentType, ReactNode } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 type Page = NextPage & {
   getLayout?: (page: ReactNode) => ReactNode;
@@ -25,7 +27,21 @@ export default function App({ Component, pageProps }: Props) {
       return (
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
-            <Layout>{page}</Layout>
+            <Layout>
+              <ToastContainer
+                position="top-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={true}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+              {page}
+            </Layout>
           </QueryClientProvider>
         </Provider>
       );
@@ -33,6 +49,18 @@ export default function App({ Component, pageProps }: Props) {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
+        <ToastContainer
+          position="top-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={true}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         {layoutComponent(<Component {...pageProps} />)}
       </QueryClientProvider>
     </Provider>

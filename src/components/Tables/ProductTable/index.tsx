@@ -1,12 +1,13 @@
-import { handeleOpenModal } from "@/Redux/slices/modalSlices";
+// import { handeleOpenModal } from "@/Redux/slices/modalSlices";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useRouter } from "next/router";
 import { EditProductModal } from "@/components/Modal";
 import useGetCategory from "@/hooks/useGetCategory";
 import { request } from "@/utils/request";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import React, { ReactNode, useState } from "react";
 import DataTable from "react-data-table-component";
-import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const ProductTable = () => {
   // const { openModal, product } = useSelector((state) => state.modalReducer);
@@ -23,7 +24,7 @@ const ProductTable = () => {
     const response = await request.get(url);
     return response.data.data;
   };
-  const router = useRouter();
+  // const router = useRouter();
   const {
     data: dataProduct,
     isLoading: isLoadingProduct,
@@ -51,6 +52,7 @@ const ProductTable = () => {
 
   const handleDelete = async (id) => {
     const response = await request.delete(`/products/${id}`);
+    toast.info("حذف محصول با موفقیت انجام شد!");
     return response.data;
   };
 

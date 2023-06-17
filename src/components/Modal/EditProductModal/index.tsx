@@ -7,6 +7,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import Cookies from "universal-cookie";
 
+import { toast } from "react-toastify";
+
 interface Props {
   modal: GetPropsProduct;
   setModal: (isOpen: boolean) => void;
@@ -30,7 +32,8 @@ const EditProductModal = ({ modal, setModal }: Props) => {
         },
       }
     );
-    setModal(false)
+    setModal(false);
+    toast.success("ویرایش با موفقیت ثبت شد!");
     return response.data;
   };
 
@@ -68,28 +71,30 @@ const EditProductModal = ({ modal, setModal }: Props) => {
         modal ? "flex" : "hidden"
       }`}
     >
-      <div className="w-7/12 bg-meWhite p-4 rounded-xl flex flex-col gap-4">
+      <div className="w-5/12 bg-meMain p-4 rounded-xl flex flex-col gap-4 shadow-xl ">
         <button
-          className="py-2 px-2 bg-white"
+          className="w-8"
           // onClick={() => dispatch(handeleCloseModal())}
           onClick={() => setModal(false)}
         >
-          close
+          <img src="/images/icon/close.png" alt="" className="w-8" />
         </button>
         <form
           onSubmit={handleSubmit}
           action=""
           dir="rtl"
-          className="flex gap-2 flex-col justify-between"
+          className="flex gap-8 flex-col justify-between"
         >
-          <label htmlFor="">نام محصول</label>
-          <input
-            type="text"
-            name="nameEditedProduct"
-            placeholder="نام محصول"
-            defaultValue={modal.name}
-            className="w-[40%] py-2 px-4"
-          />
+          <p className="flex items-center gap-4">
+            <label htmlFor="">نام محصول :</label>
+            <input
+              type="text"
+              name="nameEditedProduct"
+              placeholder="نام محصول"
+              defaultValue={modal.name}
+              className="w-[80%] py-2 px-4 shadow-md rounded-md"
+            />
+          </p>
 
           <ImageViewer
             images={images}
@@ -97,12 +102,15 @@ const EditProductModal = ({ modal, setModal }: Props) => {
             imageFiles={imageFiles}
             setImageFiles={setImageFiles}
           />
-          <p>عکس قبلی محصول:</p>
-          <img
-            src={`${process.env.BASE_IMAGE_URL}${modal.images[0]}`}
-            className="w-32"
-            alt=""
-          />
+          <div className="flex items-center gap-12">
+            <p>عکس قبلی محصول:</p>
+            <img
+              src={`${process.env.BASE_IMAGE_URL}${modal.images[0]}`}
+              className="w-32"
+              alt=""
+            />
+          </div>
+
           <button>ذخیره تغییرات</button>
         </form>
       </div>

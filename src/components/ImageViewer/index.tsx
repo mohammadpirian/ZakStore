@@ -5,7 +5,7 @@ const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 function ImageViewer({ imageFiles, setImageFiles, images, setImages }) {
   
 
-  const changeHandler = (e) => {
+  const changeHandler = (e:any) => {
     const { files } = e.target;
     const validImageFiles = [];
     for (let i = 0; i < files.length; i++) {
@@ -53,9 +53,8 @@ function ImageViewer({ imageFiles, setImageFiles, images, setImages }) {
 
   return (
     <div className="App">
-      <form>
-        <p>
-          <label htmlFor="file">Upload images</label>
+      <form className=" flex gap-4">
+          <label htmlFor="file">ویرایش عکس محصول :</label>
           <input
             type="file"
             id="file"
@@ -63,10 +62,9 @@ function ImageViewer({ imageFiles, setImageFiles, images, setImages }) {
             accept="image/png, image/jpg, image/jpeg"
             multiple
           />
-        </p>
       </form>
       {images.length > 0 ? (
-        <div className="flex gap-2">
+        <div className="flex gap-2 p-4">
           {images.map((image, idx) => {
             return (
               <p key={idx}>
