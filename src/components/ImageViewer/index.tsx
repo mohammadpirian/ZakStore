@@ -3,9 +3,7 @@ import React, { useEffect, useState } from "react";
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
 function ImageViewer({ imageFiles, setImageFiles, images, setImages }) {
-  
-
-  const changeHandler = (e:any) => {
+  const changeHandler = (e: any) => {
     const { files } = e.target;
     const validImageFiles = [];
     for (let i = 0; i < files.length; i++) {
@@ -54,14 +52,14 @@ function ImageViewer({ imageFiles, setImageFiles, images, setImages }) {
   return (
     <div className="App">
       <form className=" flex gap-4">
-          <label htmlFor="file">ویرایش عکس محصول :</label>
-          <input
-            type="file"
-            id="file"
-            onChange={changeHandler}
-            accept="image/png, image/jpg, image/jpeg"
-            multiple
-          />
+        <label htmlFor="file">ویرایش عکس محصول :</label>
+        <input
+          type="file"
+          id="file"
+          onChange={changeHandler}
+          accept="image/png, image/jpg, image/jpeg"
+          multiple
+        />
       </form>
       {images.length > 0 ? (
         <div className="flex gap-2 p-4">
@@ -69,7 +67,11 @@ function ImageViewer({ imageFiles, setImageFiles, images, setImages }) {
             return (
               <p key={idx}>
                 {" "}
-                <img src={image} className="w-32 h-32" alt="" />{" "}
+                <img
+                  src={image}
+                  className="w-32 h-32 border-2 p-2 rounded-xl "
+                  alt=""
+                />{" "}
               </p>
             );
           })}

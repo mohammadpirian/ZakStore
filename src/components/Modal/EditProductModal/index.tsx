@@ -1,6 +1,6 @@
 // import { handeleCloseModal } from "@/Redux/slices/modalSlices";
-// import { useQuery } from "@tanstack/react-query";
 // import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 import ImageViewer from "@/components/ImageViewer";
 import { request } from "@/utils/request";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import Cookies from "universal-cookie";
 
 import { toast } from "react-toastify";
+import useGetCategory from "@/hooks/useGetCategory";
 
 interface Props {
   modal: GetPropsProduct;
@@ -18,6 +19,29 @@ const EditProductModal = ({ modal, setModal }: Props) => {
   // const { openModal, product } = useSelector((state) => state.modalReducer);
   // console.log(openModal, product);
   // const dispatch = useDispatch();
+  const [editInputCategory, setEditInputCategory] = useState("");
+
+  const fetchData = async (url: string) => {
+    const response = await request.get(url);
+    return response.data.data;
+  };
+
+  const {
+    data: category,
+    isLoading: isLoadingcategory,
+    isError: isErrorcategory,
+    error: errorcategory,
+  } = useGetCategory();
+  const {
+    data: data2,
+    isLoading: isLoading2,
+    isError: isError2,
+    error: error2,
+  } = useQuery(
+    ["data2", editInputCategory],
+    () => fetchData(`/subcategories?category=${editInputCategory}`),
+    { enabled: !!editInputCategory }
+  );
 
   const editProduct = async (productForm: FormData) => {
     const cookie = new Cookies();
@@ -51,11 +75,21 @@ const EditProductModal = ({ modal, setModal }: Props) => {
     // console.log(e.target.elements.nameProduct.value);
     e.preventDefault();
     const nameProduct = e.target.elements.nameEditedProduct.value;
+    const brandProduct = e.target.elements.brandEditedProduct.value;
+    const priceProduct = e.target.elements.priceEditedProduct.value;
+    const quantityProduct = e.target.elements.quantityEditedProduct.value;
+    const categoryProduct = e.target.elements.categoryEditedProduct.value;
+    const subcategoryProduct = e.target.elements.subcategoryEditedProduct.value;
     const imagesProduct = imageFiles;
 
     // console.log(imagesProduct);
     const productForm = new FormData();
     productForm.append("name", nameProduct);
+    productForm.append("brand", brandProduct);
+    productForm.append("price", priceProduct);
+    productForm.append("quantity", quantityProduct);
+    productForm.append("category", categoryProduct);
+    productForm.append("subcategory", subcategoryProduct);
     for (let i = 0; i < imagesProduct.length; i++) {
       productForm.append("images", imagesProduct[i]);
     }
@@ -71,30 +105,121 @@ const EditProductModal = ({ modal, setModal }: Props) => {
         modal ? "flex" : "hidden"
       }`}
     >
-      <div className="w-5/12 bg-meMain p-4 rounded-xl flex flex-col gap-4 shadow-xl ">
-        <button
-          className="w-8"
-          // onClick={() => dispatch(handeleCloseModal())}
-          onClick={() => setModal(false)}
-        >
-          <img src="/images/icon/close.png" alt="" className="w-8" />
-        </button>
+      <div className="w-5/12 h-[90%] bg-white p-4 rounded-xl flex flex-col gap-4 shadow-xl overflow-y-scroll no-scrollbar">
+        <div className="flex justify-between">
+          <button
+            className="w-6"
+            // onClick={() => dispatch(handeleCloseModal())}
+            onClick={() => setModal(false)}
+          >
+            <img
+              src="/images/icon/close.png"
+              alt=""
+              className="w-6 rounded-full hover:shadow-xl"
+            />
+          </button>
+          <h2>ویرایش محصول</h2>
+          <div className="w-8"></div>
+        </div>
+
+        <p className="text-meHalfBlack">{modal.name}</p>
+        <div className="flex justify-center ">
+          <img
+            src={`${process.env.BASE_IMAGE_URL}${modal.images[0]}`}
+            className="w-32 border-2 p-2 rounded-xl"
+            alt=""
+          />
+        </div>
+
         <form
           onSubmit={handleSubmit}
           action=""
           dir="rtl"
-          className="flex gap-8 flex-col justify-between"
+          className="flex gap-8 flex-wrap p-4 justify-center"
         >
-          <p className="flex items-center gap-4">
+          <div className="w-[45%]">
             <label htmlFor="">نام محصول :</label>
             <input
               type="text"
               name="nameEditedProduct"
               placeholder="نام محصول"
               defaultValue={modal.name}
-              className="w-[80%] py-2 px-4 shadow-md rounded-md"
+              className="w-full py-2 px-4 rounded-md border-2 text-sm"
             />
-          </p>
+          </div>
+          <div className="w-[45%]">
+            <label htmlFor="">برند محصول :</label>
+            <input
+              type="text"
+              name="brandEditedProduct"
+              placeholder="برند محصول"
+              defaultValue={modal.brand}
+              className="w-full py-2 px-4 rounded-md border-2 text-sm"
+            />
+          </div>
+          <div className="w-[45%]">
+            <label htmlFor="">قیمت محصول :</label>
+            <input
+              type="text"
+              name="priceEditedProduct"
+              placeholder="قیمت محصول"
+              defaultValue={modal.price}
+              className="w-full py-2 px-4 rounded-md border-2 text-sm"
+            />
+          </div>
+          <div className="w-[45%]">
+            <label htmlFor="">موجودی محصول :</label>
+            <input
+              type="text"
+              name="quantityEditedProduct"
+              placeholder="موجودی محصول"
+              defaultValue={modal.quantity}
+              className="w-full py-2 px-4 rounded-md border-2 text-sm"
+            />
+          </div>
+          <div className="w-[45%]">
+            <label htmlFor="">گروه بندی</label>
+            <select
+              name="categoryEditedProduct"
+              id=""
+              className="w-full py-2 px-4 border-2 rounded-md text-sm"
+              onChange={(e) => setEditInputCategory(e.target.value)}
+            >
+              <option selected hidden>
+                {
+                  category.categories.filter(
+                    (item) => item._id == modal.category
+                  )[0].name
+                }
+              </option>
+              {category?.categories.map((item: GetCategory) => {
+                return (
+                  <option key={item._id} value={item._id}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="w-[45%]">
+            <label htmlFor="">زیر گروه </label>
+            <select
+              name="subcategoryEditedProduct"
+              id=""
+              className="w-full py-2 px-4 border-2 rounded-md text-sm"
+            >
+              <option selected hidden>
+                انتخاب زیر گروه
+              </option>
+              {data2?.subcategories.map((item: GetCategory) => {
+                return (
+                  <option key={item._id} value={item._id}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
 
           <ImageViewer
             images={images}
@@ -102,16 +227,9 @@ const EditProductModal = ({ modal, setModal }: Props) => {
             imageFiles={imageFiles}
             setImageFiles={setImageFiles}
           />
-          <div className="flex items-center gap-12">
-            <p>عکس قبلی محصول:</p>
-            <img
-              src={`${process.env.BASE_IMAGE_URL}${modal.images[0]}`}
-              className="w-32"
-              alt=""
-            />
-          </div>
-
-          <button>ذخیره تغییرات</button>
+          <button className="bg-meGreen py-2 px-16 rounded-md text-meWhite hover:bg-meGreen2">
+            ذخیره تغییرات
+          </button>
         </form>
       </div>
     </div>
@@ -119,52 +237,3 @@ const EditProductModal = ({ modal, setModal }: Props) => {
 };
 
 export default EditProductModal;
-
-// const [editInputCategory, setEditInputCategory] = useState("");
-
-// const fetchData = async (url: string) => {
-//   const response = await request.get(url);
-//   return response.data.data;
-// };
-
-// const {
-//   data: category,
-//   isLoading: isLoadingcategory,
-//   isError: isErrorcategory,
-//   error: errorcategory,
-// } = useGetCategory();
-// const {
-//   data: data2,
-//   isLoading: isLoading2,
-//   isError: isError2,
-//   error: error2,
-// } = useQuery(
-//   ["data2", editInputCategory],
-//   () => fetchData(`/subcategories?category=${editInputCategory}`),
-//   { enabled: !!editInputCategory }
-// );
-
-{
-  /* <label htmlFor="">گروه بندی</label>
-          <select
-            name=""
-            id=""
-            className="w-[35%] py-2 px-4"
-            onChange={(e) => setEditInputCategory(e.target.value)}
-          >
-            <option selected hidden>
-              {
-                category.categories.filter(
-                  (item) => item._id == modal.category
-                )[0].name
-              }
-            </option>
-            {category?.categories.map((item: GetCategory) => {
-              return (
-                <option key={item._id} value={item._id}>
-                  {item.name}
-                </option>
-              );
-            })}
-          </select> */
-}
