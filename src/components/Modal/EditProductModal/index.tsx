@@ -1,14 +1,17 @@
 // import { handeleCloseModal } from "@/Redux/slices/modalSlices";
 // import { useDispatch, useSelector } from "react-redux";
+import "react-quill/dist/quill.snow.css";
 import { useQuery } from "@tanstack/react-query";
+// import ReactQuill from "react-quill";
 import ImageViewer from "@/components/ImageViewer";
 import { request } from "@/utils/request";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import Cookies from "universal-cookie";
-
 import { toast } from "react-toastify";
 import useGetCategory from "@/hooks/useGetCategory";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface Props {
   modal: GetPropsProduct;
@@ -20,11 +23,17 @@ const EditProductModal = ({ modal, setModal }: Props) => {
   // console.log(openModal, product);
   // const dispatch = useDispatch();
   const [editInputCategory, setEditInputCategory] = useState("");
-
+  const [descriptionValue, setDescriptionValue] = useState("");
   const fetchData = async (url: string) => {
     const response = await request.get(url);
     return response.data.data;
   };
+  function extractPTags(htmlString) {
+    const pTags = htmlString.split(/<p[^>]*>/).slice(1);
+    const contentArray = pTags.map((pTag) => pTag.replace(/<\/p>/, ""));
+    return contentArray;
+  }
+  // console.log(extractPTags(descriptionValue)[0]);
 
   const {
     data: category,
@@ -81,6 +90,7 @@ const EditProductModal = ({ modal, setModal }: Props) => {
     const categoryProduct = e.target.elements.categoryEditedProduct.value;
     const subcategoryProduct = e.target.elements.subcategoryEditedProduct.value;
     const imagesProduct = imageFiles;
+    const descriptionProduct = extractPTags(descriptionValue)[0];
 
     // console.log(imagesProduct);
     const productForm = new FormData();
@@ -89,6 +99,7 @@ const EditProductModal = ({ modal, setModal }: Props) => {
     productForm.append("price", priceProduct);
     productForm.append("quantity", quantityProduct);
     productForm.append("category", categoryProduct);
+    productForm.append("description", descriptionProduct);
     productForm.append("subcategory", subcategoryProduct);
     for (let i = 0; i < imagesProduct.length; i++) {
       productForm.append("images", imagesProduct[i]);
@@ -219,6 +230,15 @@ const EditProductModal = ({ modal, setModal }: Props) => {
                 );
               })}
             </select>
+          </div>
+          <div className="w-full px-3">
+            <label htmlFor="">توضیحات محصول :</label>
+            <ReactQuill
+              className="w-full text-center"
+              theme="snow"
+              defaultValue={modal.description}
+              onChange={setDescriptionValue}
+            />
           </div>
 
           <ImageViewer

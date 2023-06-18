@@ -60,7 +60,7 @@ const SingleProduct = () => {
           برند : {product?.product.brand}
         </p>
         <p className="text-meHalfBlack text-sm">
-          ویژگی : {product?.product.description}
+          توضیحات : {product?.product.description}
         </p>
         <p className="mt-4">رنگ بندی :</p>
         <div className="flex gap-2 mt-2">

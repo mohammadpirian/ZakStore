@@ -2,6 +2,7 @@ import React from "react";
 import CardForSlider from "../CardForSlider";
 import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 
 const fetchData = async (url: string) => {
   const response = await request.get(url);
@@ -33,9 +34,11 @@ const CardSlider = ({ item }: { item: GetCategory }) => {
         >
           <div className="flex flex-col px-32 gap-20 items-center">
             <h1 className="text-xl">{item.name}</h1>
-            <button className="border border-black p-2  hover:bg-meBlack2 hover:text-meMain">
-              مشاهده همه
-            </button>
+            <Link href={`categoryProduct/${item._id}`}>
+              <button className="border border-black p-2  hover:bg-meBlack2 hover:text-meMain">
+                مشاهده همه
+              </button>
+            </Link>
           </div>
           <div className="flex gap-8 p-8">
             {dataProduct?.products.map((item: GetAllProduct) => {

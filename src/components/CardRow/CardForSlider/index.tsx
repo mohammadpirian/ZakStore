@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 const CardForSlider = ({ item }: any) => {
-  console.log(item.images);
+  // console.log(item.images);
 
   return (
     <div className="bg-white  rounded-lg p-2 flex flex-col gap-2 w-48 h-56 relative justify-center items-center">

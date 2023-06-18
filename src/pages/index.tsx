@@ -31,7 +31,7 @@ export default function Home() {
         <Slider />
         {data1.categories &&
           data1?.categories.map((item) => {
-            console.log(item);
+            // console.log(item);
             return <CardSlider key={item._id} item={item} />;
           })}
       </main>
