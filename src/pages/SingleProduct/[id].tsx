@@ -43,14 +43,14 @@ const SingleProduct = () => {
 
   return (
     <div className="pt-16 flex p-8 bg-meMain" dir="rtl">
-      <div className=" mt-8">
+      <div className=" mt-8 w-[25%]">
         <img
           src={`${process.env.BASE_IMAGE_URL}${product?.product?.images[0]}`}
           alt=""
-          className="w-[32rem] shadow-xl"
+          className="w-[32rem]  shadow-xl"
         />
       </div>
-      <div className="pt-10 px-10 flex flex-col gap-2">
+      <div className="pt-10 px-10 w-[55%] flex flex-col gap-2">
         <p className="text-meBlueText py-4 text-sm">
           {product?.product?.category.name} /
           {product?.product?.subcategory.name}
@@ -59,16 +59,17 @@ const SingleProduct = () => {
         <p className="text-meHalfBlack mt-4 text-sm">
           برند : {product?.product.brand}
         </p>
-        <p className="text-meHalfBlack text-sm">
-          توضیحات : {product?.product.description}
-        </p>
-        <p className="mt-4">رنگ بندی :</p>
+        <p className=" text-meHalfBlack text-sm">رنگ بندی :</p>
         <div className="flex gap-2 mt-2">
-          <div className="w-6 h-6 shadow-xl rounded-full bg-gray-600"></div>
-          <div className="w-6 h-6 shadow-xl rounded-full bg-emerald-600"></div>
-          <div className="w-6 h-6 shadow-xl rounded-full bg-orange-600"></div>
-          <div className="w-6 h-6 shadow-xl rounded-full bg-white"></div>
+          <div className="w-6 h-6 shadow-xl rounded-full bg-gray-600 border-2"></div>
+          <div className="w-6 h-6 shadow-xl rounded-full bg-emerald-600 border-2"></div>
+          <div className="w-6 h-6 shadow-xl rounded-full bg-orange-600 border-2"></div>
+          <div className="w-6 h-6 shadow-xl rounded-full bg-white border-2"></div>
         </div>
+        <p className="text-meHalfBlack text-sm mt-6">
+          <span className="text-base text-black ">توضیحات</span> : {product?.product.description}
+        </p>
+        
         <div className="flex mt-6 gap-8 h-24 bg-meWhite justify-center rounded-xl p-4">
           <div className="flex flex-col items-center">
             <img
@@ -112,7 +113,7 @@ const SingleProduct = () => {
           </p>
         </div>
       </div>
-      <div className="bg-meWhite flex flex-col p-8 rounded-xl h-[28rem] w-96">
+      <div className="bg-meWhite flex w-[20%] flex-col p-8 rounded-xl h-[28rem] w-96">
         <h2>فروشنده</h2>
         <div className="flex gap-4 border-b py-2 border-meButtonBlack">
           <img src="/images/logo/logo2.png" alt="" className="w-7" />
