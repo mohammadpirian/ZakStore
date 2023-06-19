@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { request } from "@/utils/request";
+import Link from "next/link";
 
 const fetchData = async (url: string) => {
   const response = await request.get(url);
@@ -20,13 +21,20 @@ const SubCategory = ({ id }: { id: string | undefined }) => {
   }
   return data2?.map((item2: any) => {
     return (
-      <a
-        key={data2._id}
-        onClick={(e) => console.log(e.target)}
-        className="hover:bg-gray-100 cursor-pointer px-1 rounded"
+      <Link
+        key={item2?._id}
+        href={{
+          pathname: `/subcategoryProduct/${item2?.name}`,
+          query: { id: item2?._id },
+        }}
       >
-        {item2.name}
-      </a>
+        <button
+          onClick={(e) => console.log(e.target)}
+          className="hover:bg-gray-100 cursor-pointer px-1 rounded"
+        >
+          {item2.name}
+        </button>
+      </Link>
     );
   });
 };

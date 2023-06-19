@@ -38,6 +38,7 @@ interface GetAllProduct {
   images?: string[];
   slugname?: string;
 }
+
 interface GetPropsProduct {
   brand: string;
   category: string;

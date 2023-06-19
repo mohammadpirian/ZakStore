@@ -32,7 +32,7 @@ const SingleProduct = () => {
     isError: isErrorProduct,
     error: errorProduct,
   } = useGetProductById(router.query.id as RouterId);
-  // console.log(router.query.id);
+  console.log(router.query);
 
   if (isLoadingProduct) {
     return (
@@ -67,41 +67,42 @@ const SingleProduct = () => {
           <div className="w-6 h-6 shadow-xl rounded-full bg-white border-2"></div>
         </div>
         <p className="text-meHalfBlack text-sm mt-6">
-          <span className="text-base text-black ">توضیحات</span> : {product?.product.description}
+          <span className="text-base text-black ">توضیحات</span> :{" "}
+          {product?.product.description}
         </p>
-        
-        <div className="flex mt-6 gap-8 h-24 bg-meWhite justify-center rounded-xl p-4">
-          <div className="flex flex-col items-center">
+
+        <div className="flex mt-6 gap-10 h-24 bg-meWhite justify-center rounded-xl p-4">
+          <div className="flex flex-col items-center gap-2">
             <img
               src="/images/icon/express-delivery.svg"
               alt=""
               className="w-10"
             />
-            <p className="text-xs">امکان تحویل اکسپرس</p>
+            <p className="text-[10px]">امکان تحویل اکسپرس</p>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center gap-2">
             <img src="/images/icon/support.svg" alt="" className="w-10" />
-            <p className="text-xs">24 ساعته ، 7 روز هفته</p>
+            <p className="text-[10px]">24 ساعته ، 7 روز هفته</p>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center gap-2">
             <img
               src="/images/icon/cash-on-delivery.svg"
               alt=""
               className="w-10"
             />
-            <p className="text-xs">امکان پرداخت در محل</p>
+            <p className="text-[10px]">امکان پرداخت در محل</p>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center gap-2">
             <img src="/images/icon/days-return.svg" alt="" className="w-10" />
-            <p className="text-xs">هفت روز ضمانت بازگشت کالا</p>
+            <p className="text-[10px]">هفت روز ضمانت بازگشت کالا</p>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center gap-2">
             <img
               src="/images/icon/original-products.svg"
               alt=""
               className="w-10"
             />
-            <p className="text-xs"> ضمانت اصل بودن کالا</p>
+            <p className="text-[10px]"> ضمانت اصل بودن کالا</p>
           </div>
         </div>
         <div className="border-t border-meButtonBlack py-4 mt-4">

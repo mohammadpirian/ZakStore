@@ -34,7 +34,7 @@ const CardSlider = ({ item }: { item: GetCategory }) => {
         >
           <div className="flex flex-col px-32 gap-20 items-center">
             <h1 className="text-xl">{item.name}</h1>
-            <Link href={`categoryProduct/${item._id}`}>
+            <Link href={{pathname:`/CategoryProduct/${item.name}`,query:{id:item._id}}}>
               <button className="border border-black p-2  hover:bg-meBlack2 hover:text-meMain">
                 مشاهده همه
               </button>
