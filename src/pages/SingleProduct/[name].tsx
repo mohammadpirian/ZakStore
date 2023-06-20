@@ -3,6 +3,8 @@ import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import React from "react";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 const SingleProduct = () => {
   // const fetchData = async (url: string) => {
@@ -32,25 +34,34 @@ const SingleProduct = () => {
     isError: isErrorProduct,
     error: errorProduct,
   } = useGetProductById(router.query.id as RouterId);
-  console.log(router.query);
+  // console.log(router.query);
 
   if (isLoadingProduct) {
     return (
       <div className="p-40 flex justify-center items-center">Loading...</div>
     );
   }
-  // console.log(product);
+  console.log(product?.product.images[0]);
 
   return (
     <div className="pt-16 flex p-8 bg-meMain" dir="rtl">
-      <div className=" mt-8 w-[25%]">
+      <div className=" mt-8 w-[30%]">
+        
+      <Splide dir="ltr">
+        {product?.product?.images.map((item:string)=>{
+          console.log(item);
+          return<SplideSlide key={item}>
         <img
-          src={`${process.env.BASE_IMAGE_URL}${product?.product?.images[0]}`}
-          alt=""
-          className="w-[32rem]  shadow-xl"
+          src={`${process.env.BASE_IMAGE_URL}${item}`}
+          alt={item}
+          className="w-[32rem] shadow-xl"
         />
+        </SplideSlide>
+        })}
+      </Splide>
+        
       </div>
-      <div className="pt-10 px-10 w-[55%] flex flex-col gap-2">
+      <div className="pt-10 px-10 w-[53%] flex flex-col gap-2">
         <p className="text-meBlueText py-4 text-sm">
           {product?.product?.category.name} /
           {product?.product?.subcategory.name}
@@ -114,7 +125,7 @@ const SingleProduct = () => {
           </p>
         </div>
       </div>
-      <div className="bg-meWhite flex w-[20%] flex-col p-8 rounded-xl h-[28rem] w-96">
+      <div className="bg-meWhite flex w-[17%] flex-col p-8 rounded-xl h-[28rem] w-96">
         <h2>فروشنده</h2>
         <div className="flex gap-4 border-b py-2 border-meButtonBlack">
           <img src="/images/logo/logo2.png" alt="" className="w-7" />
@@ -122,7 +133,7 @@ const SingleProduct = () => {
         </div>
         <div className="flex gap-4 border-b py-2 border-meButtonBlack">
           <img src="/images/logo/logo2.png" alt="" className="w-7" />
-          <p className="text-sm">ماریا کلوز</p>
+          <p className="text-sm">{product?.product.brand} کلوز</p>
         </div>
         <div className="flex flex-col gap-2 border-b py-2 border-meButtonBlack">
           <p className="text-sm font-semibold">موجود در انبار زاک استور</p>
