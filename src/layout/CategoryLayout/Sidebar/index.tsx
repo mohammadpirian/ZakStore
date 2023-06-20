@@ -25,7 +25,7 @@ const SidebarCategory = () => {
       <p className="text-xs text-meHalfBlack p-4">
         فروشگاه اینترنتی زاک استور / {router.query.name}
       </p>
-      <div className="border flex flex-col gap-4 p-4 rounded-xl">
+      <div className="border flex flex-col gap-4 p-4 rounded-xl mb-8">
           {category?.categories &&
             category.categories.map((item: GetCategory) => {
               return (

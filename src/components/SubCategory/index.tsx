@@ -3,11 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import { request } from "@/utils/request";
 import Link from "next/link";
 
+interface Props {
+  id: string | undefined;
+  setIsDropdownOpen: (isDropdownOpen: boolean) => void;
+  isDropdownOpen: boolean;
+}
+
 const fetchData = async (url: string) => {
   const response = await request.get(url);
   return response.data.data.subcategories;
 };
-const SubCategory = ({ id }: { id: string | undefined }) => {
+
+const SubCategory = ({ id, setIsDropdownOpen, isDropdownOpen }: Props) => {
   // console.log(id);
   const {
     data: data2,
@@ -29,7 +36,7 @@ const SubCategory = ({ id }: { id: string | undefined }) => {
         }}
       >
         <button
-          onClick={(e) => console.log(e.target)}
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           className="hover:bg-gray-100 cursor-pointer px-1 rounded"
         >
           {item2.name}

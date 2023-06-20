@@ -121,7 +121,11 @@ const Navbar = () => {
                   return (
                     <div key={item._id} className="flex flex-col gap-1">
                       <h2 className="border-b px-8">{item.name}</h2>
-                      <SubCategory id={item._id} />
+                      <SubCategory
+                        id={item._id}
+                        setIsDropdownOpen={setIsDropdownOpen}
+                        isDropdownOpen={isDropdownOpen}
+                      />
                     </div>
                   );
                 })}
