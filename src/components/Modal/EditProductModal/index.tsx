@@ -134,12 +134,16 @@ const EditProductModal = ({ modal, setModal }: Props) => {
         </div>
 
         <p className="text-meHalfBlack">{modal.name}</p>
-        <div className="flex justify-center ">
-          <img
-            src={`${process.env.BASE_IMAGE_URL}${modal.images[0]}`}
+        <div className="flex justify-center gap-2">
+          {modal.images.map((item)=>{
+            return<img
+            key={item}
+            src={`${process.env.BASE_IMAGE_URL}${item}`}
             className="w-32 border-2 p-2 rounded-xl"
             alt=""
           />
+          })}
+          
         </div>
 
         <form

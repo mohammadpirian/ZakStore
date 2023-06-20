@@ -9,7 +9,7 @@ const fetchData = async (url: string) => {
 export default function useGetAllProductByCatId(id: string | undefined) {
   const productCat = useQuery(
     ["productCat", id],
-    () => fetchData(`/products?category=${id}`),
+    () => fetchData(`/products?category=${id}&limit=all`),
     { enabled: !!id }
   );
   return productCat;
