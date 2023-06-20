@@ -28,7 +28,7 @@ const EditProductModal = ({ modal, setModal }: Props) => {
     const response = await request.get(url);
     return response.data.data;
   };
-  function extractPTags(htmlString) {
+  function extractPTags(htmlString: string) {
     const pTags = htmlString.split(/<p[^>]*>/).slice(1);
     const contentArray = pTags.map((pTag) => pTag.replace(/<\/p>/, ""));
     return contentArray;
@@ -135,15 +135,16 @@ const EditProductModal = ({ modal, setModal }: Props) => {
 
         <p className="text-meHalfBlack">{modal.name}</p>
         <div className="flex justify-center gap-2">
-          {modal.images.map((item)=>{
-            return<img
-            key={item}
-            src={`${process.env.BASE_IMAGE_URL}${item}`}
-            className="w-32 border-2 p-2 rounded-xl"
-            alt=""
-          />
+          {modal.images.map((item) => {
+            return (
+              <img
+                key={item}
+                src={`${process.env.BASE_IMAGE_URL}${item}`}
+                className="w-32 border-2 p-2 rounded-xl"
+                alt=""
+              />
+            );
           })}
-          
         </div>
 
         <form
@@ -203,7 +204,7 @@ const EditProductModal = ({ modal, setModal }: Props) => {
               <option selected hidden>
                 {
                   category.categories.filter(
-                    (item) => item._id == modal.category
+                    (item: GetCategory) => item._id == modal.category
                   )[0].name
                 }
               </option>

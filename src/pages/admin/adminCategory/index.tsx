@@ -103,7 +103,7 @@ const AdminCategory = () => {
             <option value="" selected hidden>
               دسته بندی
             </option>
-            {category?.categories.map((item) => {
+            {category?.categories.map((item: GetCategory) => {
               return (
                 <option key={item._id} value={item._id}>
                   {item.name}

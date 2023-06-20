@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { CiLogin } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import Cookies from "universal-cookie";
+import SearchBoxProducts from "./../../../components/SearchBox/index";
 
 // useEffect(() => {
 //   const getData = async () => {
@@ -55,6 +56,7 @@ const Navbar = () => {
   // console.log(cookie.get("adminToken"));
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [openSerchBox, setOpenSerchBox] = useState(false);
 
   const {
     data: category,
@@ -75,6 +77,9 @@ const Navbar = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+  // =========================================================
+
+  // =======================================================================
 
   return (
     <div dir="rtl" className="container  absolute z-20">
@@ -94,6 +99,9 @@ const Navbar = () => {
             <button>درباره ما</button>
           </div>
           <div className="flex gap-4 ">
+            <button onClick={() => setOpenSerchBox(!openSerchBox)}>
+              <img src="/images/icon/search.png" alt="" className="w-6 mb-3" />
+            </button>
             <Link href="/loginAdmin">
               <button>
                 <img src="/images/icon/admin2.png" alt="" className="w-6" />
@@ -133,6 +141,10 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      <SearchBoxProducts
+        setOpenSerchBox={setOpenSerchBox}
+        openSerchBox={openSerchBox}
+      />
     </div>
   );
 };

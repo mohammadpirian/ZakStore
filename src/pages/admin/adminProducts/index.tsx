@@ -101,6 +101,12 @@ const AdminProducts = () => {
         />
         <input
           type="text"
+          name="brandProduct"
+          placeholder="برند محصول را وارد کنید"
+          className="p-2 rounded-xl bg-gray-100"
+        />
+        <input
+          type="text"
           name="priceProduct"
           placeholder="قیمت محصول را وارد کنید"
           className="p-2 rounded-xl bg-gray-100"
@@ -111,12 +117,7 @@ const AdminProducts = () => {
           placeholder="موجودی محصول را وارد کنید"
           className="p-2 rounded-xl bg-gray-100"
         />
-        <input
-          type="text"
-          name="brandProduct"
-          placeholder="برند محصول را وارد کنید"
-          className="p-2 rounded-xl bg-gray-100"
-        />
+
         <select
           name="categoryProduct"
           id=""
