@@ -3,7 +3,7 @@ import ImageViewer from "@/components/ImageViewer";
 import useGetCategory from "@/hooks/useGetCategory";
 import { AdminLayout } from "@/layout";
 import { request } from "@/utils/request";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { ReactNode, useState } from "react";
 import Cookies from "universal-cookie";
 
@@ -20,7 +20,12 @@ const createProduct = async (productForm: FormData) => {
 
 const AdminProducts = () => {
   const [selectPhotoAdmin, setSelectPhotoAdmin] = useState("انتخاب عکس محصول");
-  const mutation = useMutation(createProduct);
+  // const mutation = useMutation(createProduct);
+  const client = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: createProduct,
+    onSuccess: () => client.invalidateQueries({ queryKey: ["dataProduct"] }),
+  });
   const [inputCategory, setInputCategory] = useState("");
   // const [category, setCategory] = useState("");
 
@@ -51,6 +56,7 @@ const AdminProducts = () => {
     // console.log(Object.fromEntries(productForm));
 
     mutation.mutate(productForm);
+    e.target.reset();
   };
 
   const fetchData = async (url: string) => {
