@@ -44,17 +44,21 @@ const SearchBoxProducts = ({ openSerchBox, setOpenSerchBox }: Props) => {
   console.log(product);
   const formatResult = (item) => {
     return (
-      <div className="flex items-center justify-between p-2">
-        <div className="flex items-center gap-4">
-          <img
-            src={`${process.env.BASE_IMAGE_URL}${item.images[0]}`}
-            className="w-16 rounded"
-          />
-          <span className="">{item.name}</span>
-        </div>
+      
+        <div className="flex items-center justify-between p-2 ">
+          <div className="flex items-center gap-4">
+            <img
+              src={`${process.env.BASE_IMAGE_URL}${item.images[0]}`}
+              className="w-16 rounded"
+            />
+            <span className="">{item.name}</span>
+          </div>
 
-        <span className="text-xs text-meBlueText mr-4">{item.price} تومان</span>
-      </div>
+          <span className="text-xs text-meBlueText mr-4">
+            {item.price} تومان
+          </span>
+        </div>
+      
     );
   };
   return (
@@ -66,16 +70,11 @@ const SearchBoxProducts = ({ openSerchBox, setOpenSerchBox }: Props) => {
         e.target == e.currentTarget && setOpenSerchBox(!openSerchBox)
       }
     >
-      <button
-        className=" w-8 h-8 p-[2px] rounded-md"
-        onClick={() => setOpenSerchBox(!openSerchBox)}
-      >
-        <img src="/images/icon/close2.png" alt="" />
-      </button>
       <div className=" w-[28rem] ">
         <ReactSearchAutocomplete
+        className="search-box-class"
           items={product?.products}
-          maxResults={5}
+          // maxResults={6}
           onSearch={handleOnSearch}
           onHover={handleOnHover}
           onSelect={handleOnSelect}

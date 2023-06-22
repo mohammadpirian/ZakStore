@@ -119,3 +119,15 @@ body,
     }
   }
 }
+.search-box-class div {
+  padding: 0rem 0.5rem;
+}
+.ffXrxx {
+  overflow-y: scroll;
+  height: 30rem;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+.ffXrxx::-webkit-scrollbar {
+  display: none;
+}
