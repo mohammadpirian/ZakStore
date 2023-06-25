@@ -41,7 +41,7 @@ const SearchBoxProducts = ({ openSerchBox, setOpenSerchBox }: Props) => {
     console.log("Focused");
   };
 
-  console.log(product);
+  // console.log(product);
   const formatResult = (item) => {
     return (
       

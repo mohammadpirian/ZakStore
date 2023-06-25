@@ -4,7 +4,7 @@ import { request } from "@/utils/request";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import React, { ReactNode, useState } from "react";
 import DataTable from "react-data-table-component";
-import EasyEdit from 'react-easy-edit';
+import EasyEdit from "react-easy-edit";
 import { toast } from "react-toastify";
 
 const fetchData = async (url: string) => {
@@ -63,7 +63,7 @@ const StockTable = () => {
     isLoading: isLoadingQuantityProduct,
     isError: isErrQuantityProduct,
     error: errQuantityProduct,
-  } = useQuery(["QuantityProduct"], () => fetchData(`/products`));
+  } = useQuery(["QuantityProduct"], () => fetchData(`/products?limit="all"`));
 
   ////////////////////////////////////////////////////////////////////////
 
@@ -82,7 +82,7 @@ const StockTable = () => {
     console.log(id);
     console.log(fieldName);
     console.log(newValue);
-    
+
     const obj = { id: id, [fieldName]: newValue };
     setPatches([...patches, obj]);
 

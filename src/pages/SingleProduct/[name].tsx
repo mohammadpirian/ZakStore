@@ -2,16 +2,23 @@ import useGetProductById from "@/hooks/useGetProductById";
 import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+import { useDispatch, useSelector } from "react-redux";
+import { handeleAddTOCart, handeleEmptyCart } from "@/Redux/slices/cartSlices";
 
 const SingleProduct = () => {
   // const fetchData = async (url: string) => {
   //   const response = await request.get(url);
   //   return response.data.data;
   // };
+  const cart = useSelector((state) => state.cart.CartProducts);
+  console.log(cart);
+  const dispatch = useDispatch();
+
   const router = useRouter();
+  const [orderQuantity, setOrderQuantity] = useState(1);
 
   // console.log(router.query.id);
 
@@ -41,25 +48,25 @@ const SingleProduct = () => {
       <div className="p-40 flex justify-center items-center">Loading...</div>
     );
   }
-  console.log(product?.product.images[0]);
+  // console.log(product?.product.images[0]);
 
   return (
     <div className="pt-16 flex p-8 bg-meMain" dir="rtl">
       <div className=" mt-8 w-[30%]">
-        
-      <Splide dir="ltr">
-        {product?.product?.images.map((item:string)=>{
-          console.log(item);
-          return<SplideSlide key={item}>
-        <img
-          src={`${process.env.BASE_IMAGE_URL}${item}`}
-          alt={item}
-          className="w-[32rem] shadow-xl"
-        />
-        </SplideSlide>
-        })}
-      </Splide>
-        
+        <Splide dir="ltr">
+          {product?.product?.images.map((item: string) => {
+            // console.log(item);
+            return (
+              <SplideSlide key={item}>
+                <img
+                  src={`${process.env.BASE_IMAGE_URL}${item}`}
+                  alt={item}
+                  className="w-[32rem] shadow-xl"
+                />
+              </SplideSlide>
+            );
+          })}
+        </Splide>
       </div>
       <div className="pt-10 px-10 w-[53%] flex flex-col gap-2">
         <p className="text-meBlueText py-4 text-sm">
@@ -143,7 +150,7 @@ const SingleProduct = () => {
           <p className="text-xs">ارسال زاک استور تراک</p>
           <p className="text-xs">ارسال فوری (شهر تهران)</p>
         </div>
-        <div className="flex flex-col gap-16 py-4">
+        <div className="flex flex-col gap-10 py-4">
           <p className="flex gap-1 text-xs ">
             قیمت محصول :
             <span className="text-sm mr-6 text-meBlueText">
@@ -151,7 +158,33 @@ const SingleProduct = () => {
             </span>{" "}
             <span>تومان</span>
           </p>
-          <button className="p-2 bg-meRedBtn text-white rounded-lg">
+          <div className="flex justify-between items-center gap-2">
+            <p className="text-xs">اضافه به سبد شما :</p>
+            <button
+              className="w-6 flex justify-center items-center h-6 bg-meRedBtn hover:bg-red-500 text-white rounded-md"
+              onClick={() =>
+                orderQuantity < product?.product.quantity &&
+                setOrderQuantity(orderQuantity + 1)
+              }
+            >
+              +
+            </button>
+            <p className="text-xs">{orderQuantity}</p>
+            <button
+              className="w-6 flex justify-center items-center h-6 bg-meRedBtn hover:bg-red-500 text-white rounded-md"
+              onClick={() =>
+                orderQuantity > 1 && setOrderQuantity(orderQuantity - 1)
+              }
+            >
+              -
+            </button>
+          </div>
+          <button
+            className="p-2 bg-meRedBtn hover:bg-red-500 text-white rounded-lg"
+            onClick={() =>
+              dispatch(handeleAddTOCart({ ...product?.product, orderQuantity }))
+            }
+          >
             افزودن به سبد
           </button>
         </div>

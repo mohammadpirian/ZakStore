@@ -37,7 +37,7 @@ const SubCategory = ({ id, setIsDropdownOpen, isDropdownOpen }: Props) => {
       >
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className="hover:bg-gray-100 cursor-pointer px-1 rounded"
+          className="w-full flex py-1 pl-8 pr-2  hover:bg-gray-100 cursor-pointer px-1 rounded"
         >
           {item2.name}
         </button>
