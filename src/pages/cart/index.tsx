@@ -3,25 +3,21 @@ import React, { useEffect, useState } from "react";
 import { handeleAddTOCart, handeleEmptyCart } from "@/Redux/slices/cartSlices";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 const Cart = () => {
   const [totalPriceCart, setTotalPriceCart] = useState(0);
-  const cart = useSelector((state) => state.cart.CartProducts);
+  const cart = useSelector((state) => state.cartSlices.CartProducts);
   console.log(cart);
   const dispatch = useDispatch();
 
-useEffect(() => {
-  const mamad = cart.reduce((sum,item)=>sum+item.totalPriceproduct,0)
+  useEffect(() => {
+    const mamad = cart.reduce((sum, item) => sum + item.totalPriceproduct, 0);
     setTotalPriceCart(mamad);
-  
-});
+  });
 
   return (
     <div className="pt-16 bg-meMain flex" dir="rtl">
       <div className="w-9/12 p-4 flex flex-col gap-4">
         {cart.map((item) => {
-          // setTotalPriceCart((prev)=>prev + item.totalPriceproduct);
           return <CardCart key={item._id} item={item} />;
         })}
       </div>

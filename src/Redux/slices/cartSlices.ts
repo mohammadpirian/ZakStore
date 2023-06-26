@@ -1,9 +1,27 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { combineReducers, createSlice, current } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 // const initialState = {
 //   openModal: false,
 //   product: "",
 // };
+
+const presistConfig = {
+  key: "cartSlices",
+  version: 1,
+  storage,
+};
+
 const initialState = {
   // openModal: false,
   CartProducts: [],
@@ -14,27 +32,34 @@ const cartSlices = createSlice({
   name: "cart",
   reducers: {
     handeleAddTOCart: (state, action) => {
-      // state.openModal = true;
       console.log(current(state));
       const existingOrder = state.CartProducts.find(
         (order) => order._id === action.payload._id
       );
       if (existingOrder) {
         existingOrder.orderQuantity += action.payload.orderQuantity;
-        existingOrder.totalPriceproduct += action.payload.orderQuantity*action.payload.price;
-
+        existingOrder.totalPriceproduct +=
+          action.payload.orderQuantity * action.payload.price;
       } else {
-        state.CartProducts.push({...action.payload, totalPriceproduct:action.payload.orderQuantity*action.payload.price});
+        state.CartProducts.push({
+          ...action.payload,
+          totalPriceproduct:
+            action.payload.orderQuantity * action.payload.price,
+        });
       }
       // console.log(orderOfCart.orderQuantity);
     },
     handeleEmptyCart: (state) => {
-      // state.openModal = false;
       state.CartProducts = [];
+    },
+    handeleRemoveFromCart: (state,action) => {
+      // state.CartProducts.filter((item)=>)
     },
   },
 });
 
-export default cartSlices.reducer;
+// export default cartSlices.reducer;
+const reducers = combineReducers({ cartSlices: cartSlices.reducer });
+export const persistedReducer = persistReducer(presistConfig as any, reducers);
 
 export const { handeleAddTOCart, handeleEmptyCart } = cartSlices.actions;

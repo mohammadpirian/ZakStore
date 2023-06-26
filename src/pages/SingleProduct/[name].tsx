@@ -15,7 +15,7 @@ const SingleProduct = () => {
   //   const response = await request.get(url);
   //   return response.data.data;
   // };
-  const cart = useSelector((state) => state.cart.CartProducts);
+  const cart = useSelector((state) => state.cartSlices.CartProducts);
   console.log(cart);
   const dispatch = useDispatch();
 
@@ -183,7 +183,6 @@ const SingleProduct = () => {
           <button
             className="p-2 bg-meRedBtn hover:bg-red-500 text-white rounded-lg"
             onClick={() => {
-
               dispatch(
                 handeleAddTOCart({
                   ...product?.product,
