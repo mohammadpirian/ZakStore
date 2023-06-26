@@ -52,8 +52,12 @@ const cartSlices = createSlice({
     handeleEmptyCart: (state) => {
       state.CartProducts = [];
     },
-    handeleRemoveFromCart: (state,action) => {
-      // state.CartProducts.filter((item)=>)
+    handeleRemoveFromCart: (state, action) => {
+      console.log(action.payload);
+      const afterRemove = state.CartProducts.filter(
+        (item) => item._id !== action.payload._id
+      );
+      state.CartProducts = afterRemove;
     },
   },
 });
@@ -62,4 +66,5 @@ const cartSlices = createSlice({
 const reducers = combineReducers({ cartSlices: cartSlices.reducer });
 export const persistedReducer = persistReducer(presistConfig as any, reducers);
 
-export const { handeleAddTOCart, handeleEmptyCart } = cartSlices.actions;
+export const { handeleAddTOCart, handeleEmptyCart, handeleRemoveFromCart } =
+  cartSlices.actions;

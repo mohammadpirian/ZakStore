@@ -91,7 +91,6 @@ const EditProductModal = ({ modal, setModal }: Props) => {
     const subcategoryProduct = e.target.elements.subcategoryEditedProduct.value;
     const imagesProduct = imageFiles;
     const descriptionProduct = extractPTags(descriptionValue)[0];
-
     // console.log(imagesProduct);
     const productForm = new FormData();
     productForm.append("name", nameProduct);
