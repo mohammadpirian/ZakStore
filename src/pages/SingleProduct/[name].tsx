@@ -8,6 +8,8 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { handeleAddTOCart, handeleEmptyCart } from "@/Redux/slices/cartSlices";
 
+type RouterId = string | undefined;
+
 const SingleProduct = () => {
   // const fetchData = async (url: string) => {
   //   const response = await request.get(url);
@@ -33,14 +35,13 @@ const SingleProduct = () => {
   //   { enabled: !!router.query.id }
   // );
 
-  type RouterId = string | undefined;
-
   const {
     data: product,
     isLoading: isLoadingProduct,
     isError: isErrorProduct,
     error: errorProduct,
   } = useGetProductById(router.query.id as RouterId);
+
   // console.log(router.query);
 
   if (isLoadingProduct) {
@@ -181,9 +182,15 @@ const SingleProduct = () => {
           </div>
           <button
             className="p-2 bg-meRedBtn hover:bg-red-500 text-white rounded-lg"
-            onClick={() =>
-              dispatch(handeleAddTOCart({ ...product?.product, orderQuantity }))
-            }
+            onClick={() => {
+
+              dispatch(
+                handeleAddTOCart({
+                  ...product?.product,
+                  orderQuantity,
+                })
+              );
+            }}
           >
             افزودن به سبد
           </button>

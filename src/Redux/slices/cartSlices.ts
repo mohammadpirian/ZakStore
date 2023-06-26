@@ -21,8 +21,10 @@ const cartSlices = createSlice({
       );
       if (existingOrder) {
         existingOrder.orderQuantity += action.payload.orderQuantity;
+        existingOrder.totalPriceproduct += action.payload.orderQuantity*action.payload.price;
+
       } else {
-        state.CartProducts.push(action.payload);
+        state.CartProducts.push({...action.payload, totalPriceproduct:action.payload.orderQuantity*action.payload.price});
       }
       // console.log(orderOfCart.orderQuantity);
     },
