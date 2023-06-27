@@ -30,7 +30,7 @@ const EditProductModal = ({ modal, setModal }: Props) => {
   };
   function extractPTags(htmlString: string) {
     const pTags = htmlString.split(/<p[^>]*>/).slice(1);
-    const contentArray = pTags.map((pTag) => pTag.replace(/<\/p>/, ""));
+    const contentArray = pTags.map((pTag) => pTag.replace(/<\/p>/, " "));
     return contentArray;
   }
   // console.log(extractPTags(descriptionValue)[0]);

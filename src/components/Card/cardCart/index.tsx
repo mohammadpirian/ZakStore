@@ -21,17 +21,19 @@ const CardCart = ({ item }) => {
               <p className="text-sm text-meBlueText">
                 {item.category.name} | {item.subcategory.name}
               </p>
-              <p className="text-xs text-meHalfBlack">{item.brand}</p>
+              
+            <div className="flex gap-1"><img className='w-4' src="/images/icon/achievement.png" alt="" /><p className="text-xs text-meHalfBlack">{item.brand}</p></div>
             </div>
           </div>
-          <div>
-            <p className="text-xs ">
+          <div className="flex flex-col gap-[0.1rem]">
+            <div className="flex gap-1"><img className='w-4' src="/images/icon/warranty.png" alt="" /><p className="text-xs ">
               گارانتی اصالت کالا {item.brand}
-            </p>
-            <p className="text-xs text-meHalfBlack">ارسال زاک استور</p>
-            <p className="text-xs text-meHalfBlack">ارسال فوری (شهر تهران)</p>
+            </p> </div>
+            <div className="flex gap-1"><img className='w-4' src="/images/icon/bag.png" alt="" /><p className="text-xs text-meHalfBlack">ارسال زاک استور </p></div>
+            <div className="flex gap-1"><img className='w-4' src="/images/icon/delivery.png" alt="" /><p className="text-xs text-meHalfBlack">ارسال فوری (شهر تهران)</p> </div>
+            <div className="flex gap-1"><img className='w-4' src="/images/icon/price.png" alt="" /><p className="text-xs text-meHalfBlack">{item.price} تومان</p> </div>
           </div>
-          <p className="text-xs text-meHalfBlack">{item.price} تومان</p>
+          
         </div>
       </div>
 
