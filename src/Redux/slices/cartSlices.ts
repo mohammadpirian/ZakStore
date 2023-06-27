@@ -65,6 +65,5 @@ const cartSlices = createSlice({
 // export default cartSlices.reducer;
 const reducers = combineReducers({ cartSlices: cartSlices.reducer });
 export const persistedReducer = persistReducer(presistConfig as any, reducers);
-
 export const { handeleAddTOCart, handeleEmptyCart, handeleRemoveFromCart } =
   cartSlices.actions;

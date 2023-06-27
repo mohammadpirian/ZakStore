@@ -1,3 +1,4 @@
+import OrderModal from "@/components/Modal/OrderModal";
 import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
 import React, { ReactNode, useState } from "react";
@@ -5,6 +6,7 @@ import DataTable from "react-data-table-component";
 import Cookies from "universal-cookie";
 
 const OrderTable = () => {
+  const [orderModalDetail, setOrderModalDetail] = useState(false);
   const [filterOrder, setFilterOrder] = useState(false);
   const cookie = new Cookies();
   const accessToken = cookie.get("adminToken");
@@ -38,9 +40,14 @@ const OrderTable = () => {
     return <div>Loading...</div>;
   }
   if (isErroruser || isErrororders) {
-    return <div> متاسفانه دسترسی به سرور مقدور نمیباشد. لطفا دوباره وارد شوید،ممنون از شکیبایی شما.</div>;
+    return (
+      <div>
+        {" "}
+        متاسفانه دسترسی به سرور مقدور نمیباشد. لطفا دوباره وارد شوید،ممنون از
+        شکیبایی شما.
+      </div>
+    );
   }
-
 
   const columns = [
     {
@@ -59,7 +66,9 @@ const OrderTable = () => {
     },
     {
       name: "بررسی",
-      cell: (row) => <button>بررسی سفارش</button>,
+      cell: (row) => (
+        <button onClick={() => setOrderModalDetail(row)}>بررسی سفارش</button>
+      ),
     },
   ];
   return (
@@ -93,6 +102,12 @@ const OrderTable = () => {
         fixedHeader
         pagination
       ></DataTable>
+      {orderModalDetail && (
+        <OrderModal
+          orderModalDetail={orderModalDetail}
+          setOrderModalDetail={setOrderModalDetail}
+        />
+      )}
     </div>
   );
 };
