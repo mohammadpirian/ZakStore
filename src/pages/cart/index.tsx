@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/Accordion";
+import Link from "next/link";
 
 const Cart = () => {
   const [totalPriceCart, setTotalPriceCart] = useState(0);
@@ -39,19 +40,19 @@ const Cart = () => {
           <div className="flex justify-between items-center w-full">
             <p className="text-sm">مجموع خرید شما :</p>
             <p className="text-sm">
-               <span>{totalPriceCart}</span> تومان
+              <span>{totalPriceCart}</span> تومان
             </p>
           </div>
           <div className="flex justify-between items-center w-full">
             <p className="text-sm">هزینه حمل و نقل شما :</p>
             <p className="text-sm">
-               <span>{Shipping}</span> تومان
+              <span>{Shipping}</span> تومان
             </p>
           </div>
           <div className="flex justify-between items-center w-full">
             <p className="text-sm">جمع سبد خرید :</p>
             <p className="text-sm">
-               <span>{totalAll}</span> تومان
+              <span>{totalAll}</span> تومان
             </p>
           </div>
           <Accordion type="single" collapsible className="w-full ">
@@ -68,9 +69,10 @@ const Cart = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          <button className="w-11/12 text-sm bg-red-600 text-white p-3 rounded-md">
+          <Link href="/loginUser" className="w-11/12">
+          <button className="w-full text-sm bg-red-600 hover:bg-red-700 text-white p-3 rounded-md">
             ثبت سفارش
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>

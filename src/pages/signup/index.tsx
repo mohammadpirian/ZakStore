@@ -33,7 +33,7 @@ const Signup = () => {
 
       <div className="flex w-6/12 h-4/6  shadow-lg rounded-lg bg-white ">
         <div className="w-[3%] h-full bg-meBlue hover:bg-meBlue2 rounded-l-lg relative cursor-point">
-          <Link href="/loginAdmin">
+          <Link href="/loginUser">
             <p className="absolute w-20 -left-8 top-[50%] text-center -rotate-90 text-white">
               ورود
             </p>

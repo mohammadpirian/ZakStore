@@ -3,48 +3,100 @@ import Cookies from "universal-cookie";
 
 export const request = axios.create({ baseURL: "http://localhost:8000/api" });
 
-const cookie = new Cookies();
 
-request.interceptors.request.use((config) => {
-  if (config.url !== "/auth/token") {
-    const accessToken = cookie.get("adminToken");
-    config.headers.Authorization = "Bearer " + accessToken;
-  }
-  return config;
-});
 
-request.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+// ==============================================
+function createRequestInstance(tokenName:string) {
+  const request = axios.create({ baseURL: "http://localhost:8000/api" });
 
-  // 401
+  const cookie = new Cookies();
 
-  (error) => {
-    const config = error.config;
-    // console.log("config", config);
-    if (error.response.status === 401 && !config.sent) {
-      config.sent = true;
-      if (config.url !== "/auth/token" && config.url !== "/auth/login") {
-        const refreshToken = cookie.get("refreshToken");
-        request.post("/auth/token", { refreshToken }).then((res) => {
-          const accessToken = res?.data.token.accessToken;
-          // add this 1 line================-------------==================
-          cookie.remove("adminToken");
-          // ================-------------==================
-          cookie.set("adminToken", accessToken, { path: "/" });
-          // cookie.set("refreshToken", res.data.refreshToken);
-          config.headers.Authorization = "Bearer " + accessToken;
-          return request(config);
-        });
-      } else if (config.url === "/auth/token") {
-        cookie.remove("adminToken");
-        cookie.remove("refreshToken");
-        location.href = "/loginAdmin";
+  request.interceptors.request.use((config) => {
+    if (config.url !== "/auth/token") {
+      const accessToken = cookie.get(tokenName);
+      config.headers.Authorization = "Bearer " + accessToken;
+    }
+    return config;
+  });
+
+  request.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+
+    (error) => {
+      const config = error.config;
+      if (error.response.status === 401 && !config.sent) {
+        config.sent = true;
+        if (config.url !== "/auth/token" && config.url !== "/auth/login") {
+          const refreshToken = cookie.get("refreshToken");
+          request.post("/auth/token", { refreshToken }).then((res) => {
+            const accessToken = res?.data.token.accessToken;
+            cookie.remove(tokenName);
+            cookie.set(tokenName, accessToken, { path: "/" });
+            config.headers.Authorization = "Bearer " + accessToken;
+            return request(config);
+          });
+        } else if (config.url === "/auth/token") {
+          cookie.remove(tokenName);
+          cookie.remove("refreshToken");
+          location.href = "/loginAdmin";
+        }
       }
     }
-  }
-);
+  );
+
+  return request;
+}
+
+const adminRequest = createRequestInstance("adminToken");
+const userRequest = createRequestInstance("userToken");
+// ==============================================
+
+// const cookie = new Cookies();
+
+// request.interceptors.request.use((config) => {
+//   if (config.url !== "/auth/token") {
+//     const accessToken = cookie.get("adminToken");
+//     config.headers.Authorization = "Bearer " + accessToken;
+//   }
+//   return config;
+// });
+
+// request.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+
+//   // 401
+
+//   (error) => {
+//     const config = error.config;
+//     // console.log("config", config);
+//     if (error.response.status === 401 && !config.sent) {
+//       config.sent = true;
+//       if (config.url !== "/auth/token" && config.url !== "/auth/login") {
+//         const refreshToken = cookie.get("refreshToken");
+//         request.post("/auth/token", { refreshToken }).then((res) => {
+//           const accessToken = res?.data.token.accessToken;
+//           // add this 1 line================-------------==================
+//           cookie.remove("adminToken");
+//           // ================-------------==================
+//           cookie.set("adminToken", accessToken, { path: "/" });
+//           // cookie.set("refreshToken", res.data.refreshToken);
+//           config.headers.Authorization = "Bearer " + accessToken;
+//           return request(config);
+//         });
+//       } else if (config.url === "/auth/token") {
+//         cookie.remove("adminToken");
+//         cookie.remove("refreshToken");
+//         location.href = "/loginAdmin";
+//       }
+//     }
+//   }
+// );
+
+// ==============================================
 // import axios from "axios";
 // import Cookies from "universal-cookie";
 

@@ -118,7 +118,7 @@ const Login = () => {
         </div>
         <div className="w-[40%] h-full">
           <img
-            src="./images/loginRegister/login.jpg"
+            src="./images/loginRegister/me.jpg"
             alt=""
             className="object-cover h-full rounded-r-lg"
           />
