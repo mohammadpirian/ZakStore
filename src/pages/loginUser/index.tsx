@@ -2,8 +2,9 @@ import { AuthLayout } from "@/layout";
 import { request } from "@/utils/request";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 
 interface IFormInputs {
@@ -12,6 +13,18 @@ interface IFormInputs {
 }
 const LoginUser = () => {
   const [showError, setShowError] = useState("");
+  const [totalPriceCart, setTotalPriceCart] = useState(0);
+  const [Shipping, setShipping] = useState(0);
+  const [totalAll, setTotalAll] = useState(0);
+
+  const cart = useSelector((state) => state.cartSlices.CartProducts);
+  useEffect(() => {
+    const mamad = cart.reduce((sum, item) => sum + item.totalPriceproduct, 0);
+    setTotalPriceCart(mamad);
+    setShipping(totalPriceCart * 0.05);
+    setTotalAll(totalPriceCart + Shipping);
+  });
+  console.log(totalAll);
 
   const {
     register,
@@ -28,7 +41,7 @@ const LoginUser = () => {
       const cookie = new Cookies();
       cookie.set("userToken", response.data.token.accessToken);
       cookie.set("refreshToken", response.data.token.refreshToken);
-      router.push("/payment");
+      router.replace(`http://localhost:3001/Payment/${totalAll}`);
       return response.data;
     } catch (error) {
       // router.push("/loginAdmin");

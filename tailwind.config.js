@@ -70,7 +70,7 @@ module.exports = {
         meBlack: "#393E46",
         meBlack2: "#222831",
         mePrimary: "#00ADB5",
-        meMain: "#E4E4E4",
+        meMain: "#E2E2E0",
         meButtonBlack: "#081226",
         meWhite: "#FAFAFA",
         meBlackDot: "#323232",

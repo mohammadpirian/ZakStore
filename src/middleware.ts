@@ -13,7 +13,9 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith("/loginUser")) {
     if (usertoken && usertoken !== "undefined")
-      return NextResponse.redirect(new URL("/payment", request.url));
+      return NextResponse.redirect(
+        new URL("http://localhost:3001/", request.url)
+      );
   }
 
   if (request.nextUrl.pathname.startsWith("/payment")) {
