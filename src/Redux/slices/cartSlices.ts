@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import produce from "immer";
 
 // const initialState = {
 //   openModal: false,
@@ -50,7 +51,12 @@ const cartSlices = createSlice({
       // console.log(orderOfCart.orderQuantity);
     },
     handeleEmptyCart: (state) => {
-      state.CartProducts = [];
+      return initialState
+      // state.CartProducts=[]
+      // state.CartProducts.splice(0, state.CartProducts.length);
+      // return produce(state, (draftState) => {
+      //   draftState.CartProducts = [];
+      // });
     },
     handeleRemoveFromCart: (state, action) => {
       console.log(action.payload);

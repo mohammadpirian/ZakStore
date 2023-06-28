@@ -28,9 +28,11 @@ const Cart = () => {
   return (
     <div className="pt-16 bg-meMain flex" dir="rtl">
       <div className="w-9/12 p-4 flex flex-col gap-4">
-        {cart.map((item) => {
-          return <CardCart key={item._id} item={item} />;
-        })}
+        {cart.length
+          ? cart.map((item) => {
+              return <CardCart key={item._id} item={item} />;
+            })
+          : ""}
       </div>
       <div className="w-3/12 p-4 ">
         <div className="bg-white p-4 rounded-xl flex flex-col items-center gap-8">
@@ -70,9 +72,10 @@ const Cart = () => {
             </AccordionItem>
           </Accordion>
           <Link href="/loginUser" className="w-11/12">
-          <button className="w-full text-sm bg-red-600 hover:bg-red-700 text-white p-3 rounded-md">
-            ثبت سفارش
-          </button></Link>
+            <button className="w-full text-sm bg-red-600 hover:bg-red-700 text-white p-3 rounded-md">
+              ثبت سفارش
+            </button>
+          </Link>
         </div>
       </div>
     </div>

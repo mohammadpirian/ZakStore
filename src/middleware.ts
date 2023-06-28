@@ -11,12 +11,12 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/admin", request.url));
   }
 
-  if (request.nextUrl.pathname.startsWith("/loginUser")) {
-    if (usertoken && usertoken !== "undefined")
-      return NextResponse.redirect(
-        new URL("http://localhost:3001/", request.url)
-      );
-  }
+  // if (request.nextUrl.pathname.startsWith("/loginUser")) {
+  //   if (usertoken && usertoken !== "undefined")
+  //     return NextResponse.redirect(
+  //       new URL("http://localhost:3001/", request.url)
+  //     );
+  // }
 
   if (request.nextUrl.pathname.startsWith("/payment")) {
     if (!usertoken) return NextResponse.redirect(new URL("/cart", request.url));

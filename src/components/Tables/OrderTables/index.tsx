@@ -33,7 +33,7 @@ const OrderTable = () => {
     isError: isErrororders,
     error: errororders,
   } = useQuery(["dataorders", filterOrder], () =>
-    fetchData(`/orders?deliveryStatus=${filterOrder}`)
+    fetchData(`/orders?deliveryStatus=${filterOrder}&limit=all`)
   );
 
   if (isLoadingorders || isLoadinguser) {

@@ -41,7 +41,8 @@ const LoginUser = () => {
       const cookie = new Cookies();
       cookie.set("userToken", response.data.token.accessToken);
       cookie.set("refreshToken", response.data.token.refreshToken);
-      router.replace(`http://localhost:3001/Payment/${totalAll}`);
+      cookie.set("userID", response.data.data.user._id);
+      router.replace(`http://localhost:7000/Payment/${totalAll}`);
       return response.data;
     } catch (error) {
       // router.push("/loginAdmin");
