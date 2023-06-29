@@ -9,6 +9,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import Cookies from "universal-cookie";
 import SearchBoxProducts from "./../../../components/SearchBox/index";
 import { useDispatch, useSelector } from "react-redux";
+import LogoutUserModal from "@/components/Modal/LogoutUserModal";
 
 // useEffect(() => {
 //   const getData = async () => {
@@ -50,7 +51,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const Navbar = () => {
-  
+  const [isOpenUserLogoutModal, setIsOpenUserLogoutModal] = useState(false);
   const cart = useSelector((state) => state.cartSlices.CartProducts);
   console.log(cart.length);
   const cookie = new Cookies();
@@ -70,10 +71,7 @@ const Navbar = () => {
   if (isLoadingcategory) {
     return <div>Loading...</div>;
   }
-  // if (isError1) {
-  //   return <div>Error:{error1}</div>;
-  // }
-
+ 
   // console.log(data1.categories);
 
   const toggleDropdown = () => {
@@ -81,9 +79,7 @@ const Navbar = () => {
   };
   // =========================================================
 const handleLogout=()=>{
-  cookie.remove("userID")
-  cookie.remove("userToken")
-  cookie.remove("refreshToken")
+  setIsOpenUserLogoutModal(true)
 }
   // =======================================================================
 
@@ -162,6 +158,7 @@ const handleLogout=()=>{
         setOpenSerchBox={setOpenSerchBox}
         openSerchBox={openSerchBox}
       />
+      {isOpenUserLogoutModal && <LogoutUserModal isOpenUserLogoutModal={isOpenUserLogoutModal} setIsOpenUserLogoutModal={setIsOpenUserLogoutModal}/>}
     </div>
   );
 };
