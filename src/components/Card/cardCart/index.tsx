@@ -5,6 +5,7 @@ import {
   handeleRemoveFromCart,
 } from "@/Redux/slices/cartSlices";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 
 const CardCart = ({ item }) => {
   console.log(item);
@@ -13,7 +14,14 @@ const CardCart = ({ item }) => {
     <div className="bg-white p-4 flex rounded-xl justify-between">
       <div className="flex">
         <div className="w-40 p-4 border-2 rounded-xl">
+        <Link
+      href={{
+        pathname: `/SingleProduct/${item.name}`,
+        query: { id: item._id },
+      }}
+    >
           <img src={`${process.env.BASE_IMAGE_URL}${item?.images[0]}`} alt="" />
+          </Link>
         </div>
         <div className="py-2 px-4 flex flex-col justify-between">
           <div className="flex flex-col gap-2">

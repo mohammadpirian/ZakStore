@@ -16,11 +16,12 @@ const AdminSidebar = () => {
   const cookie = new Cookies();
 
   const handleExit = () => {
-    
-    // cookie.remove("adminToken");
-    // cookie.remove("refreshToken");
+    cookie.remove("adminToken")
+    cookie.remove("refreshToken")
     router.push("/");
   };
+
+  
 
   useEffect(() => {
     setrout(router.pathname);
@@ -93,7 +94,7 @@ const AdminSidebar = () => {
         >
           <MdLogout className="w-6 h-6" />
 
-          <span onClick={handleExit}>خروج</span>
+          <span onClick={()=>handleExit()}>خروج</span>
         </button>
       </div>
       <div className="flex flex-col items-center pt-32">

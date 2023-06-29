@@ -47,15 +47,14 @@ import { useDispatch, useSelector } from "react-redux";
 //   }
 // ---------------------------
 
-const fetchData = async (url: string) => {
-  const response = await request.get(url);
-  return response.data.data;
-};
+
 
 const Navbar = () => {
+  
   const cart = useSelector((state) => state.cartSlices.CartProducts);
   console.log(cart.length);
   const cookie = new Cookies();
+
   // console.log(cookie.get("adminToken"));
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -81,7 +80,11 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
   // =========================================================
-
+const handleLogout=()=>{
+  cookie.remove("userID")
+  cookie.remove("userToken")
+  cookie.remove("refreshToken")
+}
   // =======================================================================
 
   return (
@@ -105,18 +108,24 @@ const Navbar = () => {
             <button onClick={() => setOpenSerchBox(!openSerchBox)}>
               <img src="/images/icon/search.png" alt="" className="w-6 mb-3" />
             </button>
-            <Link href="/loginAdmin">
+            <Link href="/loginAdmin" className="w-6">
               <button>
                 <img src="/images/icon/admin2.png" alt="" className="w-6" />
               </button>
             </Link>
-            <Link href="/loginUser">
+            <Link href="/loginUser" className={`w-6 ${cookie.get("userID")&&"hidden"}`}>
               <button>
-                <img src="/images/icon/login2.png" alt="" className="w-6" />
+                <img src="/images/icon/login3.png" alt="" className={`w-6 ${cookie.get("userID")&&"hidden"}`}/>
               </button>
             </Link>
+            <div className={`w-6 ${!cookie.get("userID")&&"hidden"}`}>
+            <button  onClick={()=>handleLogout()} >
+                <img src="/images/icon/logout.png" alt="" className={`w-6 ${!cookie.get("userID")&&"hidden"}`}/>
+            </button>
+            </div>
+            
 
-            <Link href="/cart">
+            <Link href="/cart" className="w-6">
               <button className="relative">
                 <img src="/images/icon/Cart2.png" alt="" className="w-6" />
                 <p className={`absolute flex justify-center items-center rounded-full -top-1 -left-2 text-[10px] text-white bg-red-600 w-[0.9rem] h-[0.9rem] ${cart.length==0&&'hidden'}`}>
