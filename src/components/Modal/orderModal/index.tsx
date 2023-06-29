@@ -1,4 +1,5 @@
 import useGetOrderById from "@/hooks/useGetOrderById";
+import { formatDate } from "@/utils/formatDate";
 import { request } from "@/utils/request";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -63,7 +64,7 @@ const OrderModal = ({ orderModalDetail, setOrderModalDetail }) => {
           </div>
           <div className="flex gap-2">
             <p>تاریخ سفارش :</p>
-            <p>{order?.order?.createdAt}</p>
+            <p>{formatDate(order?.order?.createdAt)}</p>
           </div>
           <div className="flex gap-2">
             <p>وضعیت سفارش :</p>

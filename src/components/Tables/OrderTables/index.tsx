@@ -1,4 +1,5 @@
 import OrderModal from "@/components/Modal/OrderModal";
+import { formatDate } from "@/utils/formatDate";
 import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
 import React, { ReactNode, useState } from "react";
@@ -61,7 +62,7 @@ const OrderTable = () => {
     { name: "مجموع مبلغ", selector: (row) => row.totalPrice, sortable: true },
     {
       name: "زمان ثبت سفارش",
-      selector: (row) => row.createdAt,
+      selector: (row) => formatDate(row.createdAt),
       sortable: true,
     },
     {
