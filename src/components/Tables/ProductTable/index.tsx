@@ -2,6 +2,7 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import { useRouter } from "next/router";
 import { EditProductModal } from "@/components/Modal";
+import DeleteProductModal from "@/components/Modal/DeleteProductModal";
 import useGetCategory from "@/hooks/useGetCategory";
 import { request } from "@/utils/request";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
@@ -12,13 +13,10 @@ import { toast } from "react-toastify";
 const ProductTable = () => {
   // const { openModal, product } = useSelector((state) => state.modalReducer);
   const [modal, setModal] = useState(false);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   // const dispatch = useDispatch();
   // console.log(openModal, product);
-  const client = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: (id) => handleDelete(id),
-    onSuccess: () => client.invalidateQueries({ queryKey: ["dataProduct"] }),
-  });
+  
 
   const fetchData = async (url: string) => {
     const response = await request.get(url);
@@ -50,10 +48,8 @@ const ProductTable = () => {
     return <div>Loading...</div>;
   }
 
-  const handleDelete = async (id) => {
-    const response = await request.delete(`/products/${id}`);
-    toast.info("حذف محصول با موفقیت انجام شد!");
-    return response.data;
+  const handleDelete = (id) => {
+    setIsOpenDeleteModal(id)
   };
 
   const handleEdit = (row) => {
@@ -105,7 +101,7 @@ const ProductTable = () => {
           >
             ویرایش
           </button>
-          <button onClick={() => mutate(row._id)}>حذف</button>
+          <button onClick={() => handleDelete(row._id)}>حذف</button>
         </div>
       ),
     },
@@ -135,6 +131,7 @@ const ProductTable = () => {
         ></DataTable>
       </div>
       {modal && <EditProductModal modal={modal} setModal={setModal} />}
+      {isOpenDeleteModal && <DeleteProductModal isOpenDeleteModal={isOpenDeleteModal} setIsOpenDeleteModal={setIsOpenDeleteModal}/>}
     </div>
   );
 };

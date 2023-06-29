@@ -3,10 +3,8 @@ import Cookies from "universal-cookie";
 
 export const request = axios.create({ baseURL: "http://localhost:8000/api" });
 
-
-
 // ==============================================
-function createRequestInstance(tokenName:string) {
+function createRequestInstance(tokenName: string) {
   const request = axios.create({ baseURL: "http://localhost:8000/api" });
 
   const cookie = new Cookies();
