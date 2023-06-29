@@ -8,6 +8,7 @@ import { CiLogin } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import Cookies from "universal-cookie";
 import SearchBoxProducts from "./../../../components/SearchBox/index";
+import { useDispatch, useSelector } from "react-redux";
 
 // useEffect(() => {
 //   const getData = async () => {
@@ -52,6 +53,8 @@ const fetchData = async (url: string) => {
 };
 
 const Navbar = () => {
+  const cart = useSelector((state) => state.cartSlices.CartProducts);
+  console.log(cart.length);
   const cookie = new Cookies();
   // console.log(cookie.get("adminToken"));
 
@@ -114,8 +117,11 @@ const Navbar = () => {
             </Link>
 
             <Link href="/cart">
-              <button>
+              <button className="relative">
                 <img src="/images/icon/Cart2.png" alt="" className="w-6" />
+                <p className={`absolute flex justify-center items-center rounded-full -top-1 -left-2 text-[10px] text-white bg-red-600 w-[0.9rem] h-[0.9rem] ${cart.length==0&&'hidden'}`}>
+                  {cart.length}
+                </p>
               </button>
             </Link>
           </div>
@@ -128,7 +134,9 @@ const Navbar = () => {
                 category.categories.map((item: GetCategory) => {
                   return (
                     <div key={item._id} className="flex flex-col gap-1">
-                      <h2 className="border-b  border-b-slate-400 text-center w-full">{item.name}</h2>
+                      <h2 className="border-b  border-b-slate-400 text-center w-full">
+                        {item.name}
+                      </h2>
                       <SubCategory
                         id={item._id}
                         setIsDropdownOpen={setIsDropdownOpen}

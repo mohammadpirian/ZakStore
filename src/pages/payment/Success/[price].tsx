@@ -13,6 +13,7 @@ const createOrder = async (dataOrder) => {
 };
 
 const Success = () => {
+  const [completeOrdering, setCompleteOrdering] = useState(false);
   const dispatch = useDispatch();
   const [postOrder, setPostOrder] = useState(false);
   const router = useRouter();
@@ -41,10 +42,11 @@ const Success = () => {
     console.log("success");
   };
 
-  useEffect(() => {
+  if (completeOrdering == false) {
+    setCompleteOrdering(true);
     handlePost();
     dispatch(handeleEmptyCart());
-  }, []);
+  }
 
   return (
     <div
