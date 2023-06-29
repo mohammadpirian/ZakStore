@@ -1,3 +1,4 @@
+import LogoutAdminModal from "@/components/Modal/LogoutAdminModal";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
@@ -11,14 +12,13 @@ import {
 import Cookies from "universal-cookie";
 
 const AdminSidebar = () => {
+  const [isOpenAdminLogoutModal, setIsOpenAdminLogoutModal] = useState(false);
   const [rout, setrout] = useState("");
   const router = useRouter();
   const cookie = new Cookies();
 
   const handleExit = () => {
-    cookie.remove("adminToken")
-    cookie.remove("refreshToken")
-    router.push("/");
+    setIsOpenAdminLogoutModal(true)
   };
 
   
@@ -102,6 +102,7 @@ const AdminSidebar = () => {
         <h2 className="text-lg">محمد پیریان</h2>
         <p className="text-meHalfBlack text-xs">mohammadpiriyan@gmail.com</p>
       </div>
+      {isOpenAdminLogoutModal && <LogoutAdminModal isOpenAdminLogoutModal={isOpenAdminLogoutModal} setIsOpenAdminLogoutModal={setIsOpenAdminLogoutModal}/>}
     </div>
   );
 };
