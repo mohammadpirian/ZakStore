@@ -51,12 +51,30 @@ const cartSlices = createSlice({
       // console.log(orderOfCart.orderQuantity);
     },
     handeleEmptyCart: (state) => {
-      return initialState
+      return initialState;
       // state.CartProducts=[]
       // state.CartProducts.splice(0, state.CartProducts.length);
       // return produce(state, (draftState) => {
       //   draftState.CartProducts = [];
       // });
+    },
+    handleAddCountOrder: (state, action) => {
+      const existingOrder = state.CartProducts.find(
+        (order) => order._id === action.payload._id
+      );
+      if (existingOrder) {
+        existingOrder.orderQuantity += 1;
+        existingOrder.totalPriceproduct += action.payload.price;
+      }
+    },
+    handleReduceCountOrder: (state, action) => {
+      const existingOrder = state.CartProducts.find(
+        (order) => order._id === action.payload._id
+      );
+      if (existingOrder) {
+        existingOrder.orderQuantity -= 1;
+        existingOrder.totalPriceproduct -= action.payload.price;
+      }
     },
     handeleRemoveFromCart: (state, action) => {
       console.log(action.payload);
@@ -71,5 +89,10 @@ const cartSlices = createSlice({
 // export default cartSlices.reducer;
 const reducers = combineReducers({ cartSlices: cartSlices.reducer });
 export const persistedReducer = persistReducer(presistConfig as any, reducers);
-export const { handeleAddTOCart, handeleEmptyCart, handeleRemoveFromCart } =
-  cartSlices.actions;
+export const {
+  handeleAddTOCart,
+  handeleEmptyCart,
+  handeleRemoveFromCart,
+  handleAddCountOrder,
+  handleReduceCountOrder
+} = cartSlices.actions;
