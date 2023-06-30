@@ -6,24 +6,25 @@ import Cookies from "universal-cookie";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import {
-    handeleAddTOCart,
-    handeleEmptyCart,
-    handeleRemoveFromCart,
-  } from "@/Redux/slices/cartSlices";
+  handeleAddTOCart,
+  handeleEmptyCart,
+  handeleRemoveFromCart,
+} from "@/Redux/slices/cartSlices";
 
 export default function DeleteProductCartModal({
-    isOpenDeleteProductCartModal, setIsOpenDeleteProductCartModal
+  isOpenDeleteProductCartModal,
+  setIsOpenDeleteProductCartModal,
 }) {
   const cookie = new Cookies();
-  const isModalOpen = isOpenDeleteProductCartModal ? true : false;
   const dispatch = useDispatch();
+  const isModalOpen = isOpenDeleteProductCartModal ? true : false;
 
   function closeModal() {
     setIsOpenDeleteProductCartModal(false);
   }
 
   const handleDelete = (isOpenDeleteProductCartModal) => {
-    dispatch(handeleRemoveFromCart(isOpenDeleteProductCartModal))
+    dispatch(handeleRemoveFromCart(isOpenDeleteProductCartModal));
     toast.info("حذف محصول با موفقیت انجام شد!");
     setIsOpenDeleteProductCartModal(false);
   };

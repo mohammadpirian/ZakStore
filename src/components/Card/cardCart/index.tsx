@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import DeleteProductCartModal from "@/components/Modal/DeleteProductCartModal";
+import { handleAddCountOrder,handleReduceCountOrder} from "@/Redux/slices/cartSlices";
+
+
 
 const CardCart = ({ item }) => {
+  const dispatch = useDispatch();
   const [isOpenDeleteProductCartModal, setIsOpenDeleteProductCartModal] =
     useState(false);
   console.log(item);
-  const dispatch = useDispatch();
   return (
     <div className="bg-white p-4 flex rounded-xl justify-between">
       <div className="flex">
@@ -76,6 +78,21 @@ const CardCart = ({ item }) => {
           <img src="/images/icon/close3.png" alt="" />
         </button>
         <div>
+          <div className="flex justify-between items-center w-16 mb-2 border-2 border-meRedBtn rounded-lg">
+            <button
+              className="w-4 flex justify-center items-center h-6 bg-meRedBtn hover:bg-red-500 text-white rounded-r-md"
+              onClick={() =>item?.orderQuantity<item?.quantity&&dispatch(handleAddCountOrder(item))}
+            >
+              +
+            </button>
+            <p className="text-xs">{item?.orderQuantity}</p>
+            <button
+              className="w-4 flex justify-center items-center h-6 bg-meRedBtn hover:bg-red-500 text-white rounded-l-md"
+              onClick={() =>item?.orderQuantity>1&&dispatch(handleReduceCountOrder(item))}
+            >
+              -
+            </button>
+          </div>
           <p className="text-xs text-meHalfBlack">
             سفارش شما : <span>{item?.orderQuantity}</span>
           </p>
