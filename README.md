@@ -1,4 +1,22 @@
+# ZakStore
+## Project Description
+This is a web-based e-commerce project built using various technologies such as React, Next.js, Tailwind CSS, Redux Toolkit, React Query, and Toastify. The project includes features like a shopping cart and an admin panel that provides users with powerful capabilities.
+
+![Screenshot 2023-07-02 112352](https://github.com/mohammadpiriyan/ZakStore/assets/50291430/75b70271-1d03-4963-8628-2a8af22a508b)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+
+## Features
+
+- **Shopping Cart:** Users can add products to their shopping cart, view the cart contents, update quantities, and proceed to checkout.
+- **User Authentication:** Users can create an account, log in, and manage their profile information.
+- **Product Catalog:** A wide range of products are available for browsing, with details such as descriptions, prices, and images.
+- **Search and Filtering:** Users can easily search for products and apply filters based on categories, prices, etc.
+- **Admin Panel:** Administrators have access to a powerful admin panel to manage products, inventory, orders, and user accounts.
+- **Order Management:** Users can view their order history, track shipments, and manage returns and refunds.
+- **Payment Integration:** Secure payment processing is integrated to facilitate smooth and reliable transactions.
+- **Responsive Design:** The application is designed to work seamlessly on various devices, including desktops, tablets, and mobile phones.
 
 ## Getting Started
 
@@ -14,25 +32,5 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+For any questions or inquiries, please contact mohammadpiriyan@gmail.com.
