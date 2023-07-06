@@ -32,7 +32,7 @@ const Cart = () => {
           ? cart.map((item) => {
               return <CardCart key={item._id} item={item} />;
             })
-          : <div className="flex flex-col items-center gap-6 p-8"><img src="/images/utils/cart.png" alt="" className="w-80" />
+          : <div className="flex flex-col items-center gap-7 p-8"><img src="/images/utils/cart.png" alt="" className="w-80" />
           <p className="text-lg font-semibold">در حال حاضر محصولی در سبد شما موجود نیست</p>
           </div> }
       </div>
