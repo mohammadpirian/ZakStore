@@ -32,7 +32,9 @@ const Cart = () => {
           ? cart.map((item) => {
               return <CardCart key={item._id} item={item} />;
             })
-          : ""}
+          : <div className="flex flex-col items-center gap-6 p-8"><img src="/images/utils/cart.png" alt="" className="w-80" />
+          <p className="text-lg font-semibold">در حال حاضر محصولی در سبد شما موجود نیست</p>
+          </div> }
       </div>
       <div className="w-3/12 p-4 ">
         <div className="bg-white p-4 rounded-xl flex flex-col items-center gap-8">
@@ -76,6 +78,7 @@ const Cart = () => {
               ثبت سفارش
             </button>
           </Link>
+          <p className='text-xs text-meHalfBlack text-center'>سفارش شما دوستان در شهرهای بجز تهران بعد از ثبت تا 3 روز کاری به دست شما خواهد رسید و دوستانی که در تهران هستند تا 24 ساعت و ارسال فوری خواهد بود.</p>
         </div>
       </div>
     </div>
