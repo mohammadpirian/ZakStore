@@ -98,7 +98,8 @@ const handleLogout=()=>{
             <div className="w-[5px] h-[5px] bg-meBlackDot rounded-full"></div>
             <button>تخفیف</button>
             <div className="w-[5px] h-[5px] bg-meBlackDot rounded-full"></div>
-            <button>درباره ما</button>
+            <Link href="/aboutMe">
+            <button>درباره ما</button></Link>
           </div>
           <div className="flex gap-4 ">
             <button onClick={() => setOpenSerchBox(!openSerchBox)}>
