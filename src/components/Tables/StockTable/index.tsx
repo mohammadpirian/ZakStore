@@ -6,13 +6,21 @@ import React, { ReactNode, useState } from "react";
 import DataTable from "react-data-table-component";
 import EasyEdit from "react-easy-edit";
 import { toast } from "react-toastify";
+import Cookies from "universal-cookie";
 
 const fetchData = async (url: string) => {
   const response = await request.get(url);
   return response.data;
 };
+const cookie = new Cookies();
+const accessToken = cookie.get("adminToken");
+
 const patchData = async (url: string, item: any) => {
-  const response = await request.patch(url, item);
+  const response = await request.patch(url, item, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   return response.data;
 };
 
@@ -32,8 +40,8 @@ const StockTable = () => {
             handleEditSave(row._id, "quantity", newValue);
           }}
           onCancel={handleEditCancel}
-          // saveButtonLable="ذخیره"
-          // cancelButtonLable="لغو"
+          saveButtonLabel="ذخیره"
+          cancelButtonLabel="بیخیال"
         />
       ),
       sortable: true,
@@ -48,8 +56,8 @@ const StockTable = () => {
             handleEditSave(row._id, "price", newValue);
           }}
           onCancel={handleEditCancel(row._id)}
-          // saveButtonLable="ذخیره"
-          // cancelButtonLable="لغو"
+          saveButtonLabel="ذخیره"
+          cancelButtonLabel="بیخیال"
         />
       ),
       sortable: true,
