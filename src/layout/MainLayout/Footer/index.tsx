@@ -20,13 +20,15 @@ const Footer = () => {
   }
   return (
     <div
-      className="flex justify-between py-4 px-12 border-t container"
+      className="flex justify-between py-4 px-12 border-t container "
       dir="rtl"
     >
       <div className="flex flex-col gap-2">
         <h2 className="border-b p-2">خرید</h2>
         {data1.categories.map((item) => (
-          <button className="flex" key={item._id}>{item.name}</button>
+          <button className="flex" key={item._id}>
+            {item.name}
+          </button>
         ))}
       </div>
       <div className="flex flex-col gap-2">
@@ -42,8 +44,15 @@ const Footer = () => {
         <a>تماس با زاک استور</a>
         <a>همکاری با زاک استور</a>
       </div>
-      <div className="flex flex-col gap-2">
-        <h2 className="border-b p-2">خرید</h2>
+      <div className="flex flex-col gap-6 py-12 items-center">
+        <img src="/images/logo/logo.png" alt="" className="w-48" />
+        <div className="flex flex-col gap-2 py-4 items-center">
+        <span><p>mohammadpiriyan@gmail.com</p></span>
+          
+        <p>شماره تماس : 09385736655</p>
+        <p></p>
+        </div>
+        
       </div>
     </div>
   );
