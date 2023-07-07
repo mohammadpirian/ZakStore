@@ -10,6 +10,7 @@ const nextConfig = {
   images: {
     domains: ["zakstorebackend.iran.liara.run"],
   },
+  output: "standalone",
 };
 
 module.exports = nextConfig;
