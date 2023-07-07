@@ -5,7 +5,7 @@ const CardForSlider = ({ item }: any) => {
   // console.log(item.images);
 
   return (
-    <div className="bg-white  rounded-lg p-2 flex flex-col gap-2 w-48 h-56 relative justify-center items-center">
+    <div className="bg-white  rounded-lg p-2 flex flex-col gap-2 w-48 h-56 relative justify-center items-center hover:shadow-lg">
       <div className="absolute rounded-full -top-20 left-3  w-[10.5rem] shadow-xl">
         <Link
           href={{
