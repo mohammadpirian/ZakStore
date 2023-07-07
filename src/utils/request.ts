@@ -1,11 +1,15 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-export const request = axios.create({ baseURL: "http://localhost:8000/api" });
+export const request = axios.create({
+  baseURL: "https://zakstorebackend.iran.liara.run/api",
+});
 
 // ==============================================
 function createRequestInstance(tokenName: string) {
-  const request = axios.create({ baseURL: "http://localhost:8000/api" });
+  const request = axios.create({
+    baseURL: "https://zakstorebackend.iran.liara.run/api",
+  });
 
   const cookie = new Cookies();
 

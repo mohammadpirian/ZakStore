@@ -1,4 +1,4 @@
-import OrderModal from "@/components/Modal/OrderModal";
+import OrderModal from "@/components/Modal/orderModal";
 import { formatDate } from "@/utils/formatDate";
 import { request } from "@/utils/request";
 import { useQuery } from "@tanstack/react-query";
