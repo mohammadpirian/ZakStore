@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import DeleteProductCartModal from "@/components/Modal/DeleteProductCartModal";
-import { handleAddCountOrder,handleReduceCountOrder} from "@/Redux/slices/cartSlices";
-
-
+import {
+  handleAddCountOrder,
+  handleReduceCountOrder,
+} from "@/Redux/slices/cartSlices";
 
 const CardCart = ({ item }) => {
   const dispatch = useDispatch();
@@ -80,15 +81,21 @@ const CardCart = ({ item }) => {
         <div>
           <div className="flex justify-between items-center w-18 mb-2 border p-1 rounded-lg mr-8">
             <button
-              className="w-4 flex justify-center items-center h-6 text-meRedBtn font-semibold hover:text-red-500 text-white rounded-r-md"
-              onClick={() =>item?.orderQuantity<item?.quantity&&dispatch(handleAddCountOrder(item))}
+              className="w-4 flex justify-center items-center h-6 text-red-600 font-semibold hover:text-red-500 text-white rounded-r-md"
+              onClick={() =>
+                item?.orderQuantity < item?.quantity &&
+                dispatch(handleAddCountOrder(item))
+              }
             >
               +
             </button>
             <p className="text-xs">{item?.orderQuantity}</p>
             <button
-              className="w-4 flex justify-center items-center h-6 text-meRedBtn font-semibold hover:text-red-500 text-white rounded-l-md"
-              onClick={() =>item?.orderQuantity>1&&dispatch(handleReduceCountOrder(item))}
+              className="w-4 flex justify-center items-center h-6 text-red-600 font-semibold hover:text-red-500 text-white rounded-l-md"
+              onClick={() =>
+                item?.orderQuantity > 1 &&
+                dispatch(handleReduceCountOrder(item))
+              }
             >
               -
             </button>
