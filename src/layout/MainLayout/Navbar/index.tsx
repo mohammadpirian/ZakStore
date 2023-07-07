@@ -11,45 +11,6 @@ import SearchBoxProducts from "./../../../components/SearchBox/index";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutUserModal from "@/components/Modal/LogoutUserModal";
 
-// useEffect(() => {
-//   const getData = async () => {
-//     const { data } = await axios.get("http://localhost:8000/api/categories");
-
-//     console.log(data.data.categories);
-//     setCategoryData(data.data.categories);
-//     return data;
-//   };
-//   getData();
-// }, []);
-// =====================map============================
-// {categoryData &&
-//   categoryData.map((item) => {
-//     return (
-//       <div key={item.id}>
-//         <h2 className="border-b px-8">{item.name}</h2>
-//       </div>
-//     );
-//   })}
-
-// ========================staticReq==========================
-// const fetchData = async () => {
-//   const response = await axios.get("http://localhost:8000/api/categories");
-//   // console.log(response.data.data);
-//   return response.data.data;
-// };
-// ----------------------------
-// const { data, isLoading, isError, error } = useQuery(["data"], fetchData);
-
-//   if (isLoading) {
-//     return <div>Loading...</div>;
-//   }
-//   if (isError) {
-//     return <div>Error:{error.message}</div>;
-//   }
-// ---------------------------
-
-
-
 const Navbar = () => {
   const [isOpenUserLogoutModal, setIsOpenUserLogoutModal] = useState(false);
   const cart = useSelector((state) => state.cartSlices.CartProducts);
@@ -71,16 +32,16 @@ const Navbar = () => {
   if (isLoadingcategory) {
     return <div>Loading...</div>;
   }
- 
+
   // console.log(data1.categories);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
   // =========================================================
-const handleLogout=()=>{
-  setIsOpenUserLogoutModal(true)
-}
+  const handleLogout = () => {
+    setIsOpenUserLogoutModal(true);
+  };
   // =======================================================================
 
   return (
@@ -99,7 +60,8 @@ const handleLogout=()=>{
             <button>تخفیف</button>
             <div className="w-[5px] h-[5px] bg-meBlackDot rounded-full"></div>
             <Link href="/aboutMe">
-            <button>درباره ما</button></Link>
+              <button>درباره ما</button>
+            </Link>
           </div>
           <div className="flex gap-4 ">
             <button onClick={() => setOpenSerchBox(!openSerchBox)}>
@@ -110,22 +72,35 @@ const handleLogout=()=>{
                 <img src="/images/icon/admin2.png" alt="" className="w-6" />
               </button>
             </Link>
-            <Link href="/loginUser" className={`w-6 ${cookie.get("userID")&&"hidden"}`}>
+            <Link
+              href="/loginUser"
+              className={`w-6 ${cookie.get("userID") && "hidden"}`}
+            >
               <button>
-                <img src="/images/icon/login3.png" alt="" className={`w-6 ${cookie.get("userID")&&"hidden"}`}/>
+                <img
+                  src="/images/icon/login3.png"
+                  alt=""
+                  className={`w-6 ${cookie.get("userID") && "hidden"}`}
+                />
               </button>
             </Link>
-            <div className={`w-6 ${!cookie.get("userID")&&"hidden"}`}>
-            <button  onClick={()=>handleLogout()} >
-                <img src="/images/icon/logout.png" alt="" className={`w-6 ${!cookie.get("userID")&&"hidden"}`}/>
-            </button>
+            <div className={`w-6 ${!cookie.get("userID") && "hidden"}`}>
+              <button onClick={() => handleLogout()}>
+                <img
+                  src="/images/icon/logout.png"
+                  alt=""
+                  className={`w-6 ${!cookie.get("userID") && "hidden"}`}
+                />
+              </button>
             </div>
-            
-
             <Link href="/cart" className="w-6">
               <button className="relative">
-                <img src="/images/icon/Cart2.png" alt="" className="w-6" />
-                <p className={`absolute flex justify-center items-center rounded-full -top-1 -left-2 text-[10px] text-white bg-red-600 w-[0.9rem] h-[0.9rem] ${cart.length==0&&'hidden'}`}>
+                <img src="/images/icon/cart2.png" alt="" className="w-6" />
+                <p
+                  className={`absolute flex justify-center items-center rounded-full -top-1 -left-2 text-[10px] text-white bg-red-600 w-[0.9rem] h-[0.9rem] ${
+                    cart.length == 0 && "hidden"
+                  }`}
+                >
                   {cart.length}
                 </p>
               </button>
@@ -159,7 +134,12 @@ const handleLogout=()=>{
         setOpenSerchBox={setOpenSerchBox}
         openSerchBox={openSerchBox}
       />
-      {isOpenUserLogoutModal && <LogoutUserModal isOpenUserLogoutModal={isOpenUserLogoutModal} setIsOpenUserLogoutModal={setIsOpenUserLogoutModal}/>}
+      {isOpenUserLogoutModal && (
+        <LogoutUserModal
+          isOpenUserLogoutModal={isOpenUserLogoutModal}
+          setIsOpenUserLogoutModal={setIsOpenUserLogoutModal}
+        />
+      )}
     </div>
   );
 };
