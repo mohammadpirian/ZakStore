@@ -81,7 +81,7 @@ const CardCart = ({ item }) => {
         <div>
           <div className="flex justify-between items-center w-18 mb-2 border p-1 rounded-lg mr-8">
             <button
-              className="w-4 flex justify-center items-center h-6 text-red-600 font-semibold hover:text-red-500 text-white rounded-r-md"
+              className="w-4 flex justify-center items-center h-6 text-red-600 font-semibold hover:text-red-500 rounded-r-md"
               onClick={() =>
                 item?.orderQuantity < item?.quantity &&
                 dispatch(handleAddCountOrder(item))
@@ -91,7 +91,7 @@ const CardCart = ({ item }) => {
             </button>
             <p className="text-xs">{item?.orderQuantity}</p>
             <button
-              className="w-4 flex justify-center items-center h-6 text-red-600 font-semibold hover:text-red-500 text-white rounded-l-md"
+              className="w-4 flex justify-center items-center h-6 text-red-600 font-semibold hover:text-red-500 rounded-l-md"
               onClick={() =>
                 item?.orderQuantity > 1 &&
                 dispatch(handleReduceCountOrder(item))
