@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    BASE_IMAGE_URL: process.env.BASE_IMAGE_URL,
+    BASE_IMAGE_URL: process.development.env.BASE_IMAGE_URL,
   },
   typescript: {
     ignoreBuildErrors: true,
