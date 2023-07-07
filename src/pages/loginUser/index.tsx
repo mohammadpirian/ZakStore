@@ -42,7 +42,7 @@ const LoginUser = () => {
       cookie.set("userToken", response.data.token.accessToken);
       cookie.set("refreshToken", response.data.token.refreshToken);
       cookie.set("userID", response.data.data.user._id);
-      router.replace(`http://localhost:7000/Payment/${totalAll}`);
+      router.replace(`https://payment-lovat.vercel.app/Payment/${totalAll}`);
       return response.data;
     } catch (error) {
       // router.push("/loginAdmin");
