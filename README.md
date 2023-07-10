@@ -2,7 +2,7 @@
 ## Project Description
 This is a web-based e-commerce project built using various technologies such as React, Next.js, Tailwind CSS, Redux Toolkit, React Query, and Toastify. The project includes features like a shopping cart and an admin panel that provides users with powerful capabilities.
 
-![Screenshot 2023-07-02 112352](https://github.com/mohammadpiriyan/ZakStore/assets/50291430/75b70271-1d03-4963-8628-2a8af22a508b)
+![portfolio-img4](https://github.com/mohammadpiriyan/Shoea-app/assets/50291430/80124174-e26c-4895-84c5-6c3e0a37d618)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
