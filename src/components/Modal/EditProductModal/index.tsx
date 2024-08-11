@@ -20,9 +20,9 @@ interface Props {
 
 const EditProductModal = ({ modal, setModal }: Props) => {
   // const { openModal, product } = useSelector((state) => state.modalReducer);
-  // console.log(openModal, product);
+  console.log(modal);
   // const dispatch = useDispatch();
-  const [editInputCategory, setEditInputCategory] = useState("");
+  const [editInputCategory, setEditInputCategory] = useState(modal.category);
   const [descriptionValue, setDescriptionValue] = useState("");
   const fetchData = async (url: string) => {
     const response = await request.get(url);
@@ -41,6 +41,7 @@ const EditProductModal = ({ modal, setModal }: Props) => {
     isError: isErrorcategory,
     error: errorcategory,
   } = useGetCategory();
+
   const {
     data: data2,
     isLoading: isLoading2,
@@ -224,7 +225,11 @@ const EditProductModal = ({ modal, setModal }: Props) => {
               className="w-full py-2 px-4 border-2 rounded-md text-sm"
             >
               <option selected hidden>
-                انتخاب زیر گروه
+                {
+                  data2?.subcategories.find(
+                    (item: any) => item._id === modal.subcategory
+                  )?.name
+                }
               </option>
               {data2?.subcategories.map((item: GetCategory) => {
                 return (

@@ -11,29 +11,13 @@ import { handeleAddTOCart, handeleEmptyCart } from "@/Redux/slices/cartSlices";
 type RouterId = string | undefined;
 
 const SingleProduct = () => {
-  // const fetchData = async (url: string) => {
-  //   const response = await request.get(url);
-  //   return response.data.data;
-  // };
+
   const cart = useSelector((state) => state.cartSlices.CartProducts);
   console.log(cart);
   const dispatch = useDispatch();
 
   const router = useRouter();
   const [orderQuantity, setOrderQuantity] = useState(1);
-
-  // console.log(router.query.id);
-
-  // const {
-  //   data: dataProduct,
-  //   isLoading: isLoadingProduct,
-  //   isError: isErrorProduct,
-  //   error: errorProduct,
-  // } = useQuery(
-  //   ["dataProduct", router.query.id],
-  //   () => fetchData(`/products/${router.query.id}`),
-  //   { enabled: !!router.query.id }
-  // );
 
   const {
     data: product,
@@ -42,14 +26,12 @@ const SingleProduct = () => {
     error: errorProduct,
   } = useGetProductById(router.query.id as RouterId);
 
-  // console.log(router.query);
 
   if (isLoadingProduct) {
     return (
       <div className="p-40 flex justify-center items-center">Loading...</div>
     );
   }
-  // console.log(product?.product.images[0]);
 
   return (
     <div className="pt-16 flex p-8 bg-meMain" dir="rtl">

@@ -11,44 +11,6 @@ import SearchBoxProducts from "./../../../components/SearchBox/index";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutUserModal from "@/components/Modal/LogoutUserModal";
 
-// useEffect(() => {
-//   const getData = async () => {
-//     const { data } = await axios.get("http://localhost:8000/api/categories");
-
-//     console.log(data.data.categories);
-//     setCategoryData(data.data.categories);
-//     return data;
-//   };
-//   getData();
-// }, []);
-// =====================map============================
-// {categoryData &&
-//   categoryData.map((item) => {
-//     return (
-//       <div key={item.id}>
-//         <h2 className="border-b px-8">{item.name}</h2>
-//       </div>
-//     );
-//   })}
-
-// ========================staticReq==========================
-// const fetchData = async () => {
-//   const response = await axios.get("http://localhost:8000/api/categories");
-//   // console.log(response.data.data);
-//   return response.data.data;
-// };
-// ----------------------------
-// const { data, isLoading, isError, error } = useQuery(["data"], fetchData);
-
-//   if (isLoading) {
-//     return <div>Loading...</div>;
-//   }
-//   if (isError) {
-//     return <div>Error:{error.message}</div>;
-//   }
-// ---------------------------
-
-
 
 const Navbar = () => {
   const [isOpenUserLogoutModal, setIsOpenUserLogoutModal] = useState(false);
@@ -72,7 +34,6 @@ const Navbar = () => {
     return <div>Loading...</div>;
   }
  
-  // console.log(data1.categories);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);

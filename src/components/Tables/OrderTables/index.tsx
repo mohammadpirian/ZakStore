@@ -54,9 +54,9 @@ const OrderTable = () => {
     {
       name: "نام کاربر",
       selector: (row) =>
-        datauser?.users.filter((user) => user._id == row.user)[0].firstname +
+        datauser?.users.filter((user) => user._id == row.user)[0]?.firstname +
         " " +
-        datauser?.users.filter((user) => user._id == row.user)[0].lastname,
+        datauser?.users.filter((user) => user._id == row.user)[0]?.lastname,
       sortable: true,
     },
     { name: "مجموع مبلغ", selector: (row) => row.totalPrice, sortable: true },
